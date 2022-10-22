@@ -1,0 +1,43 @@
+.q-main{
+    border: 1px solid blue;
+    min-height: 300px;
+    max-width: 600px;
+    margin: auto;
+}
+.header-q{
+    border: 1px solid blue;
+    max-width: 600px;
+    height: 40px;
+    margin: auto;
+}
+.first{
+    display: flex;
+}
+.second{
+    display: flex;
+}
+.q-1{
+    min-width: 280px;
+    height: 80px;
+    background-color: cornsilk;
+    margin: 10px;
+}
+.q-1:hover{
+    background-color: rgb(249, 247, 239);
+    cursor: pointer;
+}
+.q-plate{
+    max-width: 600px;
+    min-height: 80px;
+    background-color: antiquewhite;
+}
+
+@media (max-width: 640px) {
+    /* CSS mobile ici */
+    .second{
+        display: block;
+    }
+    .first{
+        display: block;
+    }
+}
