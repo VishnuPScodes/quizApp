@@ -6,6 +6,7 @@ const router=express.Router();
 
 
 router.post("/",
+//validating using express validator middleware
 body("password").notEmpty().isStrongPassword(),
 body("email").isEmail()
 ,async (req,res)=>{
