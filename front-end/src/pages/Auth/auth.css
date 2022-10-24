@@ -1,15 +1,19 @@
 .log-main{
-    border: 1px solid blue;
+ 
     height: 300px;
     max-width: 600px;
     margin: auto;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
 }
 .welcome{
     text-align: center;
     font-weight: 600;
     font-size: 25px;
     padding-right: 25px;
+}
+.loader{
+    margin: auto;
 }
 .log-input{
     width: 90%;
@@ -21,7 +25,7 @@
 
 .log-btn{
   
-    width: 90%;
+    width: 91%;
     margin: auto;
     height: 40px;
     margin-top:15px ;

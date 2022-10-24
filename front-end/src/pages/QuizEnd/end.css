@@ -5,3 +5,20 @@
     font-weight: 700;
     font-size: 15px;
 }
+::selection{
+    background-color: antiquewhite;
+    color: white;
+}
+.quiz-end{
+    margin: auto;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+.q-cont{   
+    max-width: 575px;
+    margin: auto;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
