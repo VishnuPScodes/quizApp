@@ -5,8 +5,7 @@ import axios from 'axios';
 import { QuizEnd } from './QuizEnd/QuizEnd';
 import { Audio } from  'react-loader-spinner'
 
-export const Question=()=>{
-    
+export const Question=()=>{   
     const [dfl,setDfl]=useState(5)
     const [count,setCount]=useState(1);
     const [score,setScore]=useState(0);

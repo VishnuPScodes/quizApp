@@ -1,0 +1,49 @@
+.log-main{
+    border: 1px solid blue;
+    height: 300px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.welcome{
+    text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    padding-right: 25px;
+}
+.log-input{
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.log-btn{
+  
+    width: 90%;
+    margin: auto;
+    height: 40px;
+    margin-top:15px ;
+  
+}
+.log-btn>button{
+    background-color: cornsilk;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.log-btn>button:hover{
+    background-color: antiquewhite;
+    cursor: pointer;
+    border: none;
+}
+.log-not-reg{
+    text-align: center;
+    margin-top: 15px;
+    padding-right: 40px;
+    font-weight: 600;
+    font-size: 25px;
+    padding-right: 25px;
+    color: rgb(187, 129, 53);
+}
