@@ -28,7 +28,7 @@ export const Question = () => {
   const token = useSelector((state) => state.token);
   useEffect(() => {
     const instance = axios.create({
-      baseURL: "http://localhost:5001",
+      baseURL: "https://digiaccel-b.herokuapp.com",
       timeout: 1000,
       headers: { Authorization: "Bearer " + token },
     });
