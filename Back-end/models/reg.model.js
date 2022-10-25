@@ -5,6 +5,8 @@ const regSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
 });
 
+//hashing to protect the passwords
+
 regSchema.pre("save", function (next) {
   if (!this.isModified("password")) {
     return next();
