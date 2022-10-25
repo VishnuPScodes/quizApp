@@ -9,7 +9,7 @@ export const QuizEnd = ({ score }) => {
 
         <div className="quiz-end">your score is : {score}</div>
       </div>
-
+      <div className="line">Line graph</div>
       <Graph />
     </div>
   );

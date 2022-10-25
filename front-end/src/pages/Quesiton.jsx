@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { QuizEnd } from "./QuizEnd/QuizEnd";
 import { Audio } from "react-loader-spinner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addScore } from "../redux/action";
 
 export const Question = () => {
@@ -24,11 +24,19 @@ export const Question = () => {
   const [loader, setLoader] = useState(true);
   //using use dispatch to dispatch an action to redux to change value im redux
   const dispatch = useDispatch();
+  //getting the token from redux, stored from login page
+  const token = useSelector((state) => state.token);
   useEffect(() => {
-    axios
-      .get("http://localhost:5001/question")
-      .then((res) => {
-        setData(res.data);
+    const instance = axios.create({
+      baseURL: "http://localhost:5001",
+      timeout: 1000,
+      headers: { Authorization: "Bearer " + token },
+    });
+
+    instance
+      .get("/question")
+      .then((response) => {
+        setData(response.data);
       })
       .then(() => {
         setLoader(false);

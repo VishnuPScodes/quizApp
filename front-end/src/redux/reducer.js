@@ -5,6 +5,7 @@ const initState = {
   error: false,
   loading: false,
   scores: [],
+  token: "",
 };
 
 export const authReducer = (state = initState, action) => {
@@ -33,6 +34,12 @@ export const authReducer = (state = initState, action) => {
       return {
         ...state,
         scores: [...state.scores, action.payload],
+      };
+    }
+    case authActions.ADD_TOKEN: {
+      return {
+        ...state,
+        token: action.payload,
       };
     }
     default:

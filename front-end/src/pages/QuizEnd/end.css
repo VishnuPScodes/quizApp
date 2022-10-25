@@ -22,3 +22,13 @@
   margin-bottom: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.line {
+  height: 30px;
+  max-width: 575px;
+  margin: auto;
+  text-align: left;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}

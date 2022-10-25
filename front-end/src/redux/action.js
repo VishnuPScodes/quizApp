@@ -5,6 +5,7 @@ export const authActions = {
   AUTH_ACTION_SUCCESS: "AUTH_ACTION_SUCCESS",
   AUTH_ACTION_FAILURE: "AUTH_ACTION_FAILURE",
   ADD_SCORE_SUCCESS: "ADD_SCORE_SUCCESS",
+  ADD_TOKEN: "ADD_TOKEN",
 };
 
 export const authSuccess = () => {
@@ -28,6 +29,13 @@ export const authRequest = () => {
 export const addScore = (payload) => {
   return {
     type: authActions.ADD_SCORE_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const addToken = (payload) => {
+  return {
+    type: authActions.ADD_TOKEN,
     payload: payload,
   };
 };

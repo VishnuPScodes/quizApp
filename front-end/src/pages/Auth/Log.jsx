@@ -2,7 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authFailure, authRequest, authSuccess } from "../../redux/action";
+import {
+  addToken,
+  authFailure,
+  authRequest,
+  authSuccess,
+} from "../../redux/action";
 import { ThreeDots } from "react-loader-spinner";
 import "./auth.css";
 import { Spinner } from "@chakra-ui/react";
@@ -33,8 +38,9 @@ export const Log = () => {
       .post("http://localhost:5001/log", data)
       .then((res) => {
         console.log(res.data);
-        if (res.data == "login successful") {
+        if (res.data.token) {
           dispatch(authSuccess());
+          dispatch(addToken(res.data.token));
           alert("login successful");
           navigate("/");
         }
