@@ -4,8 +4,8 @@ import Question from "../models/question.model.js";
 
 const router = express.Router();
 
-//getting all the questions
-
+//getting the questions
+//passing the 'authenticate' function as a middleware to authenticate =>so that only if the jwt is given it will return 'true'.
 router.get("", authenticate, async (req, res) => {
   try {
     const user_id = req.user._id;
@@ -16,18 +16,9 @@ router.get("", authenticate, async (req, res) => {
   }
 });
 
-//posting questions in the db
 
-router.post("/:id", async (req, res) => {
-  try {
-    const questions = await Question.create(req.body);
-    res.send(questions);
-  } catch (error) {
-    res.send(error);
-  }
-});
 
-//getting a single set of questions
+//to get a single question
 
 router.get("/:id", async (req, res) => {
   try {
@@ -38,7 +29,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//deleting a set of questions by id
+//to delete a question
 
 router.delete("/:id", authenticate, async (req, res) => {
   try {
