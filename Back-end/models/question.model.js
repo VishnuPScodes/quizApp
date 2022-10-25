@@ -9,6 +9,11 @@ const regSchema = mongoose.Schema({
   option3: { type: String, required: true },
   answer: { type: String, required: true },
   difficulty: { type: Number, required: true },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "reg",
+    required: false,
+  },
 });
 
 const Question = mongoose.model("question", regSchema);

@@ -1,12 +1,14 @@
 import express from "express";
+import { authenticate } from "../middlewares/authenticate.js";
 import Question from "../models/question.model.js";
 
 const router = express.Router();
 
 //getting all the questions
 
-router.get("", async (req, res) => {
+router.get("", authenticate, async (req, res) => {
   try {
+    const user_id = req.user._id;
     const questions = await Question.find().lean().exec();
     res.status(200).send(questions);
   } catch (error) {
@@ -38,7 +40,7 @@ router.get("/:id", async (req, res) => {
 
 //deleting a set of questions by id
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticate, async (req, res) => {
   try {
     const question = await Question.findByIdAndDelete(req.params.id);
     res.send(question);
