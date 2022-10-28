@@ -1,4 +1,4 @@
-# quize-app
+# quizapp
 
 
 #Tools and technologies used
