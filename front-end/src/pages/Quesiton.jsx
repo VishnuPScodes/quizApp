@@ -32,7 +32,9 @@ export const Question = () => {
 
   useEffect(() => {
     axios
-      .get("https://digiaccel-c.herokuapp.com/questbank/6356d83fcf8e99fdef105f23")
+      .get(
+        "https://digiaccel-c.herokuapp.com/questbank/6356d83fcf8e99fdef105f23"
+      )
       .then((e) => {
         let data = e.data;
 
@@ -45,10 +47,11 @@ export const Question = () => {
 
   const handleCheck = (ans) => {
     axios
-      .post(`https://digiaccel-c.herokuapp.com/questbank/${single._id}?q=${ans}`)
+      .post(
+        `https://digiaccel-c.herokuapp.com/questbank/${single._id}?q=${ans}`
+      )
       .then((e) => {
         if (e.data == "") {
-          console.log("daaang");
           setind(-1);
         } else {
           let response = e.data;
@@ -59,18 +62,15 @@ export const Question = () => {
           if (currDifficulty < resDifficulty) {
             setScore((p) => p + 5);
             setCount(count + 1);
-            console.log("count is", count);
+
             dispatch(addScore(score));
           } else {
             setScore((p) => p - 2);
             setCount(count + 1);
-            console.log("count is", count);
+
             dispatch(addScore(score));
           }
-          console.log("dr", resDifficulty);
-          console.log("recied correct");
 
-          console.log("next question is", e.data);
           setSingle(e.data);
         }
       });

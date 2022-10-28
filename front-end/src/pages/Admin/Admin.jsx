@@ -12,9 +12,9 @@ export const Admin = () => {
     axios.get("https://digiaccel-c.herokuapp.com/admin").then((e) => {
       setData(e.data);
     });
-      axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
-        setCount(e.data);
-      });
+    axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
+      setCount(e.data);
+    });
   }, []);
 
   return (
@@ -32,28 +32,26 @@ export const Admin = () => {
               <input
                 className="check-box"
                 onChange={() => {
-                  console.log("e is", e);
-                  axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
-                    setCount(e.data);
-                  });
+                  axios
+                    .get("https://digiaccel-c.herokuapp.com/questbank")
+                    .then((e) => {
+                      setCount(e.data);
+                    });
                   if (count.length < 10) {
                     axios
                       .post("https://digiaccel-c.herokuapp.com/questbank", e)
-                      .then((e) => {
-                        console.log(e.data);
-                      })
+                      .then((e) => {})
                       .catch((er) => {
                         console.log(er);
                       });
                   } else {
-                    
                   }
                 }}
                 type="checkbox"
                 name=""
                 id=""
                 value={e}
-                disabled={count.length>8}
+                disabled={count.length > 8}
               />
               <label htmlFor="">{e.question}</label>
             </div>

@@ -11,7 +11,6 @@ import {
 import { ThreeDots } from "react-loader-spinner";
 import "./auth.css";
 
-
 export const Log = () => {
   //taking loading from the redux store
   const loading = useSelector((state) => state.loading);
@@ -37,7 +36,6 @@ export const Log = () => {
     axios
       .post("https://digiaccel-c.herokuapp.com/log", data)
       .then((res) => {
-        console.log(res.data);
         if (res.data.token) {
           dispatch(authSuccess());
           dispatch(addToken(res.data.token));
@@ -108,9 +106,12 @@ export const Log = () => {
           </button>
         </div>
         <div className="log-btn">
-          <button onClick={(()=>{
-            navigate('/Admin')
-          })} className="log-btn">
+          <button
+            onClick={() => {
+              navigate("/Admin");
+            }}
+            className="log-btn"
+          >
             Admin
           </button>
         </div>

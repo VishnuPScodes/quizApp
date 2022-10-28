@@ -4,14 +4,16 @@ import { Graph } from "../../components/Grapgh/Graph";
 import "./end.css";
 
 export const QuizEnd = ({ score }) => {
-   useEffect(()=>{
-      axios.delete('http://localhost:2000/questbank').then((e)=>{
+  useEffect(() => {
+    axios
+      .delete("https://digiaccel-c.herokuapp.com/questbank")
+      .then((e) => {
         console.log(e.data);
       })
-      .catch((er)=>{
+      .catch((er) => {
         console.log(er);
-      })
-   },[])
+      });
+  }, []);
   return (
     <div>
       <div className="q-cont">
