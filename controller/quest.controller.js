@@ -19,7 +19,7 @@ router.get("", async (req, res) => {
 router.post("", async (req, res) => {
   try {
     const data = await Quest.create(req.body);
-    console.log("her to post");
+
     res.send("posted");
   } catch (error) {
     res.send(error);
@@ -32,10 +32,6 @@ router.post("/:id", async (req, res) => {
   console.log(query);
   if (query) {
     const data = await Quest.findById(req.params.id).lean().exec();
-    console.log("data", data);
-
-    console.log(ans, data, "COMPARE");
-    console.log("not here");
 
     if (bcrypt.compareSync(ans, data.answer)) {
       //    return response.status(400).send({ message: "The password is invalid" });
