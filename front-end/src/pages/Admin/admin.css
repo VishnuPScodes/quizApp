@@ -1,0 +1,36 @@
+.main-admin {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-width: 750px;
+  min-height: 300px;
+  margin: auto;
+}
+.single-q {
+  min-height: 60px;
+  width: 90%;
+  margin: auto;
+  background-color: antiquewhite;
+  margin-top: 15px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+.check-box:checked {
+  height: 20px;
+  color: wheat;
+}
+.single-q:hover {
+  background-color: cornsilk;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.generate-link {
+  padding: 15px;
+  margin-left: 5%;
+  margin-top: 15px;
+  background-color: antiquewhite;
+  border: none;
+  border-radius: 10px;
+}
+.generate-link:hover {
+  background-color: cornsilk;
+  cursor: pointer;
+}

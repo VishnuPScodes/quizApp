@@ -48,3 +48,6 @@
   padding-right: 25px;
   color: rgb(187, 129, 53);
 }
+.admin-btn {
+  display: flex;
+}

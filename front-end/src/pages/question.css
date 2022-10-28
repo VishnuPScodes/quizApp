@@ -98,7 +98,7 @@
 }
 
 @media (max-width: 640px) {
-  /* CSS mobile ici */
+  /* CSS for mobile screen */
   .second {
     display: block;
   }

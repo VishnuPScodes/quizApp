@@ -10,7 +10,7 @@ import {
 } from "../../redux/action";
 import { ThreeDots } from "react-loader-spinner";
 import "./auth.css";
-import { Spinner } from "@chakra-ui/react";
+
 
 export const Log = () => {
   //taking loading from the redux store

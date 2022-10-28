@@ -1,14 +1,19 @@
 import "./question.css";
-import { Badge, flatten, Stack } from "@chakra-ui/react";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { QuizEnd } from "./QuizEnd/QuizEnd";
 import { Audio } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { addScore } from "../redux/action";
+import { NoQuestions } from "./NoQuestions.jsx/NoQuestions";
 
 export const Question = () => {
+  const [single, setSingle] = useState(1);
   const [dfl, setDfl] = useState(5);
+  //if no question available => making a state to detect that
+  const [noq, setNoq] = useState(false);
+
   //counter to count the number of questions asked
 
   const [count, setCount] = useState(0);
@@ -24,21 +29,14 @@ export const Question = () => {
   const [loader, setLoader] = useState(true);
   //using use dispatch to dispatch an action to redux to change value im redux
   const dispatch = useDispatch();
-  //getting the token from redux, stored from login page
-  const token = useSelector((state) => state.token);
-  useEffect(() => {
-    const instance = axios.create({
-      baseURL: "https://digiaccel-b.herokuapp.com",
-      timeout: 1000,
-      headers: { Authorization: "Bearer " + token },
-    });
 
-    instance
-      .get("/question")
-      .then((response) => {
-        setData(response.data);
-      })
-      .then(() => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:2000/questbank/6356d83fcf8e99fdef105f23")
+      .then((e) => {
+        let data = e.data;
+
+        setSingle(data);
         setLoader(false);
       });
   }, []);
@@ -46,41 +44,36 @@ export const Question = () => {
   //function to check the correctness of the answer given by user
 
   const handleCheck = (ans) => {
-    if (ans == data[ind].answer) {
-      if (ind == 9) {
-        setind(-1);
-      } else {
-        setLoader(true);
-        setCount((count) => count + 1);
-        let array = [...data];
-        let questionis = array.filter((a) => {
-          return a.difficulty == data[ind].difficulty + 1;
-        });
-        let index = Number(questionis[0].id) - 1;
-        setDfl(index + 1);
-        setind(index);
-        setScore((p) => p + 5);
-        dispatch(addScore(score));
-        setLoader(false);
-      }
-    } else {
-      if (ind == 0) {
-        setind(-1);
-      } else {
-        setLoader(true);
-        setCount((p) => p + 1);
-        let array = [...data];
-        let questionis = array.filter((a) => {
-          return a.difficulty == data[ind].difficulty - 1;
-        });
-        let index = Number(questionis[0].id) - 1;
-        setDfl(index + 1);
-        setScore((p) => p - 2);
-        dispatch(addScore(score));
-        setind(index);
-        setLoader(false);
-      }
-    }
+    axios
+      .post(`http://localhost:2000/questbank/${single._id}?q=${ans}`)
+      .then((e) => {
+        if (e.data == "") {
+          console.log("daaang");
+          setind(-1);
+        } else {
+          let response = e.data;
+          let resDifficulty = response.difficulty;
+          setDfl(resDifficulty);
+          setCount((p) => p + 1);
+          let currDifficulty = single.difficulty;
+          if (currDifficulty < resDifficulty) {
+            setScore((p) => p + 5);
+            setCount(count + 1);
+            console.log("count is", count);
+            dispatch(addScore(score));
+          } else {
+            setScore((p) => p - 2);
+            setCount(count + 1);
+            console.log("count is", count);
+            dispatch(addScore(score));
+          }
+          console.log("dr", resDifficulty);
+          console.log("recied correct");
+
+          console.log("next question is", e.data);
+          setSingle(e.data);
+        }
+      });
   };
   return (
     <>
@@ -98,60 +91,68 @@ export const Question = () => {
         </div>
       ) : (
         <div>
-          {" "}
-          {count == 10 ? (
-            <QuizEnd score={score} />
+          {noq == true ? (
+            <NoQuestions />
           ) : (
             <div>
-              {ind == -1 ? (
+              {" "}
+              {count == 10 ? (
                 <QuizEnd score={score} />
               ) : (
                 <div>
-                  <div className="header-q">
-                    <div>Difficulty level:</div>
-                    <div className={"df-lev-" + dfl}>{dfl}</div>
-                  </div>
-                  <div className="q-main">
-                    <div className="q-plate">{data[ind]?.question}</div>
-                    <div className="a-plate">
-                      <div className="first">
-                        <div
-                          className="q-1"
-                          onClick={() => {
-                            handleCheck(data[ind]?.option1);
-                          }}
-                        >
-                          {data[ind]?.option1}
+                  {ind == -1 ? (
+                    <QuizEnd score={score} />
+                  ) : (
+                    <div>
+                      <div>
+                        <div className="header-q">
+                          <div>Difficulty level:</div>
+                          <div className={"df-lev-" + dfl}>{dfl}</div>
                         </div>
-                        <div
-                          className="q-1"
-                          onClick={() => {
-                            handleCheck(data[ind]?.option2);
-                          }}
-                        >
-                          {data[ind]?.option2}
-                        </div>
-                      </div>
-                      <div className="second">
-                        <div
-                          className="q-1"
-                          onClick={() => {
-                            handleCheck(data[ind]?.option3);
-                          }}
-                        >
-                          {data[ind]?.option3}
-                        </div>
-                        <div
-                          className="q-1"
-                          onClick={() => {
-                            handleCheck(data[ind]?.option4);
-                          }}
-                        >
-                          {data[ind]?.option4}
+                        <div className="q-main">
+                          <div className="q-plate">{single?.question}</div>
+                          <div className="a-plate">
+                            <div className="first">
+                              <div
+                                className="q-1"
+                                onClick={() => {
+                                  handleCheck(single?.option1);
+                                }}
+                              >
+                                {single?.option1}
+                              </div>
+                              <div
+                                className="q-1"
+                                onClick={() => {
+                                  handleCheck(single?.option2);
+                                }}
+                              >
+                                {single?.option2}
+                              </div>
+                            </div>
+                            <div className="second">
+                              <div
+                                className="q-1"
+                                onClick={() => {
+                                  handleCheck(single?.option3);
+                                }}
+                              >
+                                {single?.option3}
+                              </div>
+                              <div
+                                className="q-1"
+                                onClick={() => {
+                                  handleCheck(single?.option4);
+                                }}
+                              >
+                                {single?.option4}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               )}
             </div>

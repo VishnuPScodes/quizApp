@@ -4,7 +4,8 @@ import './graph.css'
 import { useSelector } from "react-redux"
 
 
-export const Graph=()=>{
+export const Graph=({score})=>{
+    console.log('reason from graph',{score});
     //getting the score data from redux using useSelector hook
     const datais=useSelector((state)=>state.scores);
    
