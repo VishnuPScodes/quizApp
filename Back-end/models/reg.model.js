@@ -13,6 +13,7 @@ regSchema.pre("save", function (next) {
   } else {
     var hash = bcrypt.hashSync(this.password, 8);
     this.password = hash;
+    console.log("yes ths one too");
     return next();
   }
 });

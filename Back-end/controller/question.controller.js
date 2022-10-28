@@ -16,8 +16,6 @@ router.get("", authenticate, async (req, res) => {
   }
 });
 
-
-
 //to get a single question
 
 router.get("/:id", async (req, res) => {

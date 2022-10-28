@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import regController from "./controller/reg.controller.js";
 import logController from "./controller/log.controller.js";
 import queController from "./controller/question.controller.js";
+import adminController from "./controller/admin.controller.js";
+import questBankController from "./controller/quest.controller.js";
 import cors from "cors";
 
 const app = express();
@@ -15,15 +17,16 @@ app.use(express.json());
 app.use(cors());
 //making different routes for various api end points
 
+app.use("/questbank", questBankController);
 app.use("/reg", regController);
 app.use("/log", logController);
 app.use("/question", queController);
-
+app.use("/admin", adminController);
 const PORT = process.env.PORT;
-app.listen(PORT, async (req, res) => {
+app.listen(2000, async (req, res) => {
   try {
     await connect();
-    console.log("listening to the port " + PORT);
+    console.log("listening to the port " + 2000);
   } catch (error) {
     console.log(error);
   }

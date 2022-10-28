@@ -25,7 +25,7 @@ router.post(
         } else {
           regData = await Reg.create(req.body);
           const token = newToken(regData);
-          res.status(200).send({ token });
+          res.status(200).send({ token, regData });
         }
       }
     } catch (error) {
