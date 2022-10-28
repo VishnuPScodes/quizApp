@@ -12,6 +12,9 @@ export const Admin = () => {
     axios.get("https://digiaccel-c.herokuapp.com/admin").then((e) => {
       setData(e.data);
     });
+      axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
+        setCount(e.data);
+      });
   }, []);
 
   return (
@@ -33,7 +36,7 @@ export const Admin = () => {
                   axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
                     setCount(e.data);
                   });
-                  if (count.length < 8) {
+                  if (count.length < 10) {
                     axios
                       .post("https://digiaccel-c.herokuapp.com/questbank", e)
                       .then((e) => {
@@ -43,13 +46,14 @@ export const Admin = () => {
                         console.log(er);
                       });
                   } else {
-                    alert("10 questions added");
+                    
                   }
                 }}
                 type="checkbox"
                 name=""
                 id=""
                 value={e}
+                disabled={count.length>8}
               />
               <label htmlFor="">{e.question}</label>
             </div>

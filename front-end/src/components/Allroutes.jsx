@@ -3,7 +3,6 @@ import { Log } from '../pages/Auth/Log'
 import { Reg } from '../pages/Auth/Reg'
 import { Question } from '../pages/Quesiton'
 import { PrivateRoutes } from './PrivateRoutes'
-import { useSelector } from 'react-redux'
 import { Graph } from './Grapgh/Graph'
 import { Admin } from '../pages/Admin/Admin'
 

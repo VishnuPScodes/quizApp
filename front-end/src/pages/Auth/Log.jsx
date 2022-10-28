@@ -107,6 +107,13 @@ export const Log = () => {
             Register
           </button>
         </div>
+        <div className="log-btn">
+          <button onClick={(()=>{
+            navigate('/Admin')
+          })} className="log-btn">
+            Admin
+          </button>
+        </div>
       </div>
     </div>
   );
