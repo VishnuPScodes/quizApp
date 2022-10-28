@@ -35,7 +35,7 @@ export const Log = () => {
   const handleLogin = () => {
     dispatch(authRequest());
     axios
-      .post("https://digiaccel-b.herokuapp.com/log", data)
+      .post("https://digiaccel-c.herokuapp.com/log", data)
       .then((res) => {
         console.log(res.data);
         if (res.data.token) {

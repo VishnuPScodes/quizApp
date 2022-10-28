@@ -20,7 +20,7 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post("https://digiaccel-b.herokuapp.com/reg", data)
+      .post("https://digiaccel-c.herokuapp.com/reg", data)
       .then((res) => {
         setLoading(false);
         alert("Registered");

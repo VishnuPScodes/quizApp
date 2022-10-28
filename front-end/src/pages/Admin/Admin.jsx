@@ -9,7 +9,7 @@ export const Admin = () => {
   const [count, setCount] = useState([]);
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:2000/admin").then((e) => {
+    axios.get("https://digiaccel-c.herokuapp.com/admin").then((e) => {
       setData(e.data);
     });
   }, []);
@@ -30,12 +30,12 @@ export const Admin = () => {
                 className="check-box"
                 onChange={() => {
                   console.log("e is", e);
-                  axios.get("http://localhost:2000/questbank").then((e) => {
+                  axios.get("https://digiaccel-c.herokuapp.com/questbank").then((e) => {
                     setCount(e.data);
                   });
-                  if (count.length != 9) {
+                  if (count.length < 8) {
                     axios
-                      .post("http://localhost:2000/questbank", e)
+                      .post("https://digiaccel-c.herokuapp.com/questbank", e)
                       .then((e) => {
                         console.log(e.data);
                       })
@@ -43,7 +43,7 @@ export const Admin = () => {
                         console.log(er);
                       });
                   } else {
-                    alert("10 questions already added");
+                    alert("10 questions added");
                   }
                 }}
                 type="checkbox"

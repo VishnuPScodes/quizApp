@@ -32,7 +32,7 @@ export const Question = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:2000/questbank/6356d83fcf8e99fdef105f23")
+      .get("https://digiaccel-c.herokuapp.com/questbank/6356d83fcf8e99fdef105f23")
       .then((e) => {
         let data = e.data;
 
@@ -45,7 +45,7 @@ export const Question = () => {
 
   const handleCheck = (ans) => {
     axios
-      .post(`http://localhost:2000/questbank/${single._id}?q=${ans}`)
+      .post(`https://digiaccel-c.herokuapp.com/questbank/${single._id}?q=${ans}`)
       .then((e) => {
         if (e.data == "") {
           console.log("daaang");
