@@ -11,3 +11,6 @@
 
 #Deployed Link
 https://digiaccel-vishnupscodes.vercel.app/
+
+# Node version used
+v16.17.0
