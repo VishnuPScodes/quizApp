@@ -23,10 +23,10 @@ app.use("/log", logController);
 app.use("/question", queController);
 app.use("/admin", adminController);
 const PORT = process.env.PORT;
-app.listen(2000, async (req, res) => {
+app.listen(PORT, async (req, res) => {
   try {
     await connect();
-    console.log("listening to the port " + 2000);
+    console.log("listening to the port " + PORT);
   } catch (error) {
     console.log(error);
   }
