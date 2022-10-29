@@ -46,6 +46,5 @@ export const authenticate = async (req, res, next) => {
   console.log(req.user);
   //if the token is valid then we will user retrived from the token in the request object
 
-  //return next()
   next();
 };
