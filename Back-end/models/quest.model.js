@@ -15,15 +15,16 @@ const questSchema = new mongoose.Schema({
     required: false,
   },
 });
+//hashing the password
 
 questSchema.pre("save", function (next) {
- 
   var hash = bcrypt.hashSync(this.answer, 2);
   this.answer = hash;
   return next();
 });
+//matching the given password with the already existing password
 questSchema.methods.checkAnswer = function (answer) {
-  return bcrypt.compareSync(answer, this.answer);
+  return bcrypt.compareSync(answer, this.answer); // returns either true or false
 };
 
 const Quest = mongoose.model("quesbank", questSchema);
