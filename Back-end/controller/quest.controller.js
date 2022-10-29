@@ -1,8 +1,5 @@
-import mongoose from "mongoose";
 import express from "express";
-import Admin from "../models/admin.model.js";
-import Question from "../models/question.model.js";
-import { authenticate } from "../middlewares/authenticate.js";
+
 import Quest from "../models/quest.model.js";
 import bcrypt from "bcryptjs";
 const router = express.Router();
@@ -19,7 +16,7 @@ router.get("", async (req, res) => {
 router.post("", async (req, res) => {
   try {
     const data = await Quest.create(req.body);
-    console.log("her to post");
+
     res.send("posted");
   } catch (error) {
     res.send(error);
@@ -29,18 +26,13 @@ router.post("", async (req, res) => {
 router.post("/:id", async (req, res) => {
   let query = req.query.q;
   let ans = req.query.q;
-  console.log(query);
+
   if (query) {
     const data = await Quest.findById(req.params.id).lean().exec();
-    console.log("data", data);
-
-    console.log(ans, data, "COMPARE");
-    console.log("not here");
 
     if (bcrypt.compareSync(ans, data.answer)) {
-      //    return response.status(400).send({ message: "The password is invalid" });
       const single = await Quest.findById(req.params.id).lean().exec();
-      console.log("here", single);
+
       let difficulty = single.difficulty;
       let questionToSend = await Quest.findOne({
         $or: [
@@ -50,12 +42,12 @@ router.post("/:id", async (req, res) => {
       })
         .lean()
         .exec();
-      console.log("send qu", questionToSend);
+
       return res.send(questionToSend);
     } else {
       const single = await Quest.findById(req.params.id).lean().exec();
-      console.log("here", single);
-      let difficulty = single.difficulty;
+    
+      let difficulty = single?.difficulty;
       let questionToSend = await Quest.findOne({
         $or: [
           { difficulty: Number(difficulty) - 1 },
@@ -64,7 +56,7 @@ router.post("/:id", async (req, res) => {
       })
         .lean()
         .exec();
-      console.log("send qu", questionToSend);
+
       return res.send(questionToSend);
     }
   }
