@@ -43,7 +43,7 @@ export const Question = () => {
       });
   }, []);
 
-  //function to check the correctness of the answer given by user
+  //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
     axios

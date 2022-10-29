@@ -17,7 +17,7 @@ const questSchema = new mongoose.Schema({
 });
 
 questSchema.pre("save", function (next) {
-  console.log("yes exct");
+ 
   var hash = bcrypt.hashSync(this.answer, 2);
   this.answer = hash;
   return next();
