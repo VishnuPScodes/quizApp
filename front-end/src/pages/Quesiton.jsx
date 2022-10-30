@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { QuizEnd } from "./QuizEnd/QuizEnd";
 import { Audio } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addScore } from "../redux/action";
 import { NoQuestions } from "./NoQuestions.jsx/NoQuestions";
 
@@ -12,7 +12,7 @@ export const Question = () => {
   const [single, setSingle] = useState(1);
   const [dfl, setDfl] = useState(5);
   //if no question available => making a state to detect that
-  const [noq, setNoq] = useState(false);
+  const [noq, setNoq] = useState(true);
 
   //counter to count the number of questions asked
 
@@ -20,7 +20,7 @@ export const Question = () => {
   //score ,state to calculate the total score
 
   const [score, setScore] = useState(0);
- 
+
   const [ind, setind] = useState(4);
 
   const [loader, setLoader] = useState(true);
@@ -36,10 +36,13 @@ export const Question = () => {
         let data = e.data;
         setSingle(data);
         setLoader(false);
-     
+      }).then(()=>{
+        if(single){
+          setNoq(false)
+        }
       })
   }, []);
-   
+
   //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
@@ -67,7 +70,6 @@ export const Question = () => {
 
             dispatch(addScore(score));
           }
-
           setSingle(e.data);
         }
       });
