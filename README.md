@@ -1,16 +1,38 @@
-# quizApp
+
+# Adaptive quiz system
+
+A simple quiz app were admin will be able to add questions and user will be able to participate after login in.
 
 
-#Tools and technologies used
-1)React js
-2)Node js
-3)MongoDB
-4)Express js
-5)d3js
-6)Redux
+## Run Locally
 
-#Deployed Link
-https://digiaccel-vishnupscodes.vercel.app/
+Clone the project
 
-# Node version used
-v16.17.0
+```bash
+  git clone https://github.com/VishnuPScodes/quizApp
+```
+
+Go to the project directory
+
+```bash
+  cd quizApp
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
+## Deployment
+
+here is the deployed link
+```
+https://candid-hamster-8d885e.netlify.app/log
