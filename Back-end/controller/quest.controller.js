@@ -81,7 +81,7 @@ router.get("/:id", async (req, res) => {
     //getting the question of given id
     const data = await Quest.findById(req.params.id).lean().exec();
     if (data == null) {
-      res.send("error");
+      res.send(false);
     } else {
       res.send(data);
     }

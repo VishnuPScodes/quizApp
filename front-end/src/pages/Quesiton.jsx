@@ -20,10 +20,7 @@ export const Question = () => {
   //score ,state to calculate the total score
 
   const [score, setScore] = useState(0);
-  //array of scores to indicate the score on each stages
-
-  const [data, setData] = useState([]);
-
+ 
   const [ind, setind] = useState(4);
 
   const [loader, setLoader] = useState(true);
@@ -37,12 +34,12 @@ export const Question = () => {
       )
       .then((e) => {
         let data = e.data;
-
         setSingle(data);
         setLoader(false);
-      });
+     
+      })
   }, []);
-
+   
   //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
@@ -91,7 +88,7 @@ export const Question = () => {
         </div>
       ) : (
         <div>
-          {noq == true ? (
+          {noq == false ? (
             <NoQuestions />
           ) : (
             <div>
