@@ -6,7 +6,7 @@ import { QuizEnd } from "./QuizEnd/QuizEnd";
 import { Audio } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { addScore } from "../redux/action";
-import { NoQuestions } from "./NoQuestions.jsx/NoQuestions";
+
 
 export const Question = () => {
   const [single, setSingle] = useState(1);
@@ -36,11 +36,12 @@ export const Question = () => {
         let data = e.data;
         setSingle(data);
         setLoader(false);
-      }).then(()=>{
-        if(single){
-          setNoq(false)
-        }
       })
+      .then(() => {
+        if (single) {
+          setNoq(false);
+        }
+      });
   }, []);
 
   //function to check the correctness of the answer given by user ,by sending a network request to the back-end
@@ -90,72 +91,68 @@ export const Question = () => {
         </div>
       ) : (
         <div>
-          {noq == false ? (
-            <NoQuestions />
-          ) : (
-            <div>
-              {" "}
-              {count == 10 ? (
-                <QuizEnd score={score} />
-              ) : (
-                <div>
-                  {ind == -1 ? (
-                    <QuizEnd score={score} />
-                  ) : (
+          <div>
+            {" "}
+            {count == 10 ? (
+              <QuizEnd score={score} />
+            ) : (
+              <div>
+                {ind == -1 ? (
+                  <QuizEnd score={score} />
+                ) : (
+                  <div>
                     <div>
-                      <div>
-                        <div className="header-q">
-                          <div>Difficulty level:</div>
-                          <div className={"df-lev-" + dfl}>{dfl}</div>
-                        </div>
-                        <div className="q-main">
-                          <div className="q-plate">{single?.question}</div>
-                          <div className="a-plate">
-                            <div className="first">
-                              <div
-                                className="q-1"
-                                onClick={() => {
-                                  handleCheck(single?.option1);
-                                }}
-                              >
-                                {single?.option1}
-                              </div>
-                              <div
-                                className="q-1"
-                                onClick={() => {
-                                  handleCheck(single?.option2);
-                                }}
-                              >
-                                {single?.option2}
-                              </div>
+                      <div className="header-q">
+                        <div>Difficulty level:</div>
+                        <div className={"df-lev-" + dfl}>{dfl}</div>
+                      </div>
+                      <div className="q-main">
+                        <div className="q-plate">{single?.question}</div>
+                        <div className="a-plate">
+                          <div className="first">
+                            <div
+                              className="q-1"
+                              onClick={() => {
+                                handleCheck(single?.option1);
+                              }}
+                            >
+                              {single?.option1}
                             </div>
-                            <div className="second">
-                              <div
-                                className="q-1"
-                                onClick={() => {
-                                  handleCheck(single?.option3);
-                                }}
-                              >
-                                {single?.option3}
-                              </div>
-                              <div
-                                className="q-1"
-                                onClick={() => {
-                                  handleCheck(single?.option4);
-                                }}
-                              >
-                                {single?.option4}
-                              </div>
+                            <div
+                              className="q-1"
+                              onClick={() => {
+                                handleCheck(single?.option2);
+                              }}
+                            >
+                              {single?.option2}
+                            </div>
+                          </div>
+                          <div className="second">
+                            <div
+                              className="q-1"
+                              onClick={() => {
+                                handleCheck(single?.option3);
+                              }}
+                            >
+                              {single?.option3}
+                            </div>
+                            <div
+                              className="q-1"
+                              onClick={() => {
+                                handleCheck(single?.option4);
+                              }}
+                            >
+                              {single?.option4}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </>

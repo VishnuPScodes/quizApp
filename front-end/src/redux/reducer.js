@@ -42,6 +42,12 @@ export const authReducer = (state = initState, action) => {
         token: action.payload,
       };
     }
+    case authActions.EMPTY_SCORE_ARRAY :{
+      return {
+        ...state,
+        scores:[]
+      }
+    }
     default:
       return state;
   }

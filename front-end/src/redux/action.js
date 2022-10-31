@@ -6,6 +6,7 @@ export const authActions = {
   AUTH_ACTION_FAILURE: "AUTH_ACTION_FAILURE",
   ADD_SCORE_SUCCESS: "ADD_SCORE_SUCCESS",
   ADD_TOKEN: "ADD_TOKEN",
+  EMPTY_SCORE_ARRAY:"EMPTY_SCORE_ARRAY"
 };
 
 export const authSuccess = () => {
@@ -39,3 +40,10 @@ export const addToken = (payload) => {
     payload: payload,
   };
 };
+
+
+export const emptyScoreArray=()=>{
+  return {
+    type:authActions.EMPTY_SCORE_ARRAY
+  }
+}
