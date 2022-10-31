@@ -13,7 +13,7 @@ router.get("", async (req, res) => {
   }
 });
 
-//getting a single question from the admin cluster
+//getting a single question from the admin collection
 
 router.get("/:id", async (req, res) => {
   try {

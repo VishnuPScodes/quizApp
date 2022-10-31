@@ -74,7 +74,7 @@ router.post("/:id", async (req, res) => {
   }
 });
 
-//getting a single question from the questionbank cluster
+//getting a single question from the questionbank collection
 
 router.get("/:id", async (req, res) => {
   try {
