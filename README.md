@@ -35,4 +35,4 @@ Start the server
 
 here is the deployed link
 ```
-https://candid-hamster-8d885e.netlify.app/log
+https://bright-liger-665af8.netlify.app
