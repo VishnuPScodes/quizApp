@@ -11,10 +11,7 @@ function App() {
   return (
     <div className="App">
       <Allroutes />
-      {/* <Question/> */}
-     {/* <Log/> */}
-     {/* <Admin/> */}
-     {/* <QuizEnd/> */}
+     
     </div>
   );
 }
