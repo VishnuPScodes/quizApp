@@ -34,7 +34,7 @@ router.post("/:id", async (req, res) => {
 
   const data = await Quest.findById(req.params.id).lean().exec();
   //comparing the answer(hashed) and the user provided answer =>this will return either true or false
-  if (bcrypt.compareSync(ans, data.answer)) {
+  if (bcrypt.compareSync(ans, data?.answer)) {
     //if the answer is correct
     const single = await Quest.findById(req.params.id).lean().exec();
     //getting the difficulty level of the current question

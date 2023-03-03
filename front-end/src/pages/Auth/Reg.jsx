@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authRequest } from "../../redux/action";
 import { ThreeDots } from "react-loader-spinner";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import "./auth.css";
 
 export const Reg = () => {
@@ -20,27 +21,43 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post("https://digiaccel-c.herokuapp.com/reg", data)
+      .post("http://localhost:3000/reg", data)
       .then((res) => {
-        setLoading(false);
-        alert("Registered");
-        navigate("/log");
+        if (res.data == "exists") {
+          alert("User already exists ,Please sign in");
+          setLoading(false)
+        } else {
+          setLoading(false);
+          alert("Registered");
+          navigate("/log");
+        }
       })
       .catch((er) => {
         setLoading(false);
+
         alert("something went wrong");
-        console.log(er);
+        console.log("344", er);
       });
   };
   return (
     <div>
       <div className="log-main">
-        <div className="welcome">Welcome to registration page</div>
+        <AiOutlineArrowLeft
+          onClick={() => {
+            navigate("/log");
+          }}
+          fontSize={"32px"}
+          style={{
+            paddingLeft: "20px",
+            paddingTop: "20px",
+          }}
+        />
+        <div className="welcome">Let's Register</div>
         <div className="log-input">
           <input
             id="email"
             onChange={handleChange}
-            className="log-input"
+            className="log-input1"
             type="email"
             placeholder="email address"
           />
@@ -49,31 +66,43 @@ export const Reg = () => {
           <input
             id="password"
             onChange={handleChange}
-            className="log-input"
+            className="log-input1"
             type="password"
             placeholder="Password"
           />
         </div>
-        <div className="log-btn">
-          <button onClick={handleRegister} className="log-btn">
-            {loading == true ? (
-              <div className="loader">
-                <ThreeDots
-                  height="40"
-                  width="40"
-                  radius="9"
-                  color="black"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClassName=""
-                  visible={true}
-                />
-              </div>
-            ) : (
-              "Register"
-            )}
-          </button>
+        <div className="log-input">
+          <input
+            id="name"
+            onChange={handleChange}
+            className="log-input1"
+            type="text"
+            placeholder="Your name"
+          />
         </div>
+
+        <button onClick={handleRegister} className="log-btn1">
+          {loading == true ? (
+            <div className="loader">
+              <ThreeDots
+                style={{
+                  textAlignL: "center",
+                  alignSelf: "center",
+                }}
+                height="25"
+                width="25"
+                radius="9"
+                color="black"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </div>
+          ) : (
+            "Register"
+          )}
+        </button>
       </div>
     </div>
   );

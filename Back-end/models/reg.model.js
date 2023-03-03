@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 const regSchema = mongoose.Schema({
   password: { type: String, required: true },
+  name: { type: String, required: true },
+  score: { type: Number,default:0  },
   email: { type: String, required: true, unique: true },
 });
 

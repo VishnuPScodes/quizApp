@@ -1,7 +1,8 @@
 .main-admin {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 750px;
-  min-height: 300px;
+  height:100vh;
+  overflow-y: scroll;
   margin: auto;
 }
 .single-q {
@@ -12,25 +13,77 @@
   margin-top: 15px;
   font-size: 16px;
   border-radius: 10px;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 18px;
+  line-height: 24px;
 }
 .check-box:checked {
   height: 20px;
   color: wheat;
 }
 .single-q:hover {
-  background-color: cornsilk;
+  background-color: #fff8dc;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .generate-link {
+  
   padding: 15px;
   margin-left: 5%;
   margin-top: 15px;
   background-color: antiquewhite;
-  border: none;
+  border:none;
   border-radius: 10px;
+  margin-bottom: 15px;
+  transition: 1s;
+
+}
+.admin-img{
+  border: none;
+  width: 300px;
+  height: 300px;
+  background-image: url('../../../source/admin.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 5px;
+}
+.loader1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn-container{
+  border:none;
+  min-height: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .generate-link:hover {
   background-color: cornsilk;
   cursor: pointer;
+  transition: 1s;
+}
+.welocme-to-admin-page{
+  font-family: "Poppins";
+  font-size: 40px;
+  line-height: 60px;
+  text-align: center;
+
+}
+.headaer{
+ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.select-10-ques{
+  font-family: "Poppins";
+  font-size: 18px;
+  line-height: 24px;
+  padding-top: 40px;
 }

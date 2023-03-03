@@ -39,7 +39,7 @@ router.post(
             //if it is true ,that means given password and the registered passwords matches=>so send jwt as response to the front-end
             const token = newToken(regData);
 
-            res.status(200).send({ token });
+            res.status(200).send({ token,data:regData });
           }
         }
       }

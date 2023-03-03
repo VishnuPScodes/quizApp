@@ -1,32 +1,74 @@
 .log-main {
-  height: 350px;
+ 
+  min-height: 430px;
   max-width: 600px;
   margin: auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
 }
+input:focus {
+	outline: none;
+  	border: 1px solid #333;
+}
 .welcome {
   text-align: center;
   font-weight: 600;
   font-size: 25px;
-  padding-right: 25px;
+
+  padding-top: 30px;
 }
 .loader {
   margin: auto;
 }
+.log-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family:"Poppins";
+  font-weight: 500;
+  text-align: center;
+}
 .log-input {
-  width: 90%;
+  width: 80%;
+  min-height: 30px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+.log-input1 {
+  width: 100%;
   margin: auto;
   margin-top: 15px;
   height: 30px;
+  text-align: center;
+  align-self: center;
   border-radius: 10px;
+  border: 1px solid #333;
+  font-family: "Poppins";
 }
 
 .log-btn {
-  width: 90.7%;
+  width: 80%;
   margin: auto;
   height: 40px;
+  margin-top: 30px;
+  border: 1px solid black;
+}
+.log-btn1 {
+  width: 81%;
+  height: 30px;
+  margin: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid black;
+  align-self: center;
+  background-color: cornsilk;
+
   margin-top: 15px;
+  font-family: "Poppins";
 }
 .log-btn > button {
   background-color: cornsilk;
@@ -34,19 +76,22 @@
   border-radius: 10px;
   border: 1px solid black;
 }
-.log-btn > button:hover {
+ button:hover {
   background-color: antiquewhite;
   cursor: pointer;
   border: none;
+  border-radius: 20px;
+  
 }
 .log-not-reg {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 40px;
   padding-right: 40px;
   font-weight: 600;
   font-size: 25px;
   padding-right: 25px;
   color: rgb(187, 129, 53);
+  font-family: "Poppins";
 }
 .admin-btn {
   display: flex;

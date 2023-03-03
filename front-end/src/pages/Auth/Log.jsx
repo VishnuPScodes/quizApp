@@ -3,13 +3,19 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+ 
+  addScore,
   addToken,
+  addUserScore,
   authFailure,
   authRequest,
   authSuccess,
 } from "../../redux/action";
 import { ThreeDots } from "react-loader-spinner";
 import "./auth.css";
+import Particles from "particles.js";
+
+import ParticlesBg from "particles-bg";
 
 export const Log = () => {
   //taking loading from the redux store
@@ -34,17 +40,20 @@ export const Log = () => {
   const handleLogin = () => {
     dispatch(authRequest());
     axios
-      .post("https://digiaccel-c.herokuapp.com/log", data)
+      .post("http://localhost:3000/log", data)
       .then((res) => {
         if (res.data.token) {
           dispatch(authSuccess());
           dispatch(addToken(res.data.token));
+          console.log(res.data.data.score)
+          dispatch(addUserScore(res.data.data.score))
           alert("login successful");
           navigate("/");
         }
       })
       .catch((er) => {
         dispatch(authFailure());
+        console.log('er',er)
         alert("something went wrong");
         console.log(er);
       });
@@ -59,13 +68,14 @@ export const Log = () => {
 
   return (
     <div>
+      <ParticlesBg  type="cobweb" bg={true} />
       <div className="log-main">
-        <div className="welcome">Welcome to login page</div>
+        <div className="welcome">Let's login</div>
         <div className="log-input">
           <input
             id="email"
             onChange={handleChange}
-            className="log-input"
+            className="log-input1"
             type="text"
             placeholder="email address"
           />
@@ -74,47 +84,45 @@ export const Log = () => {
           <input
             id="password"
             onChange={handleChange}
-            className="log-input"
+            className="log-input1"
             type="password"
             placeholder="Password"
           />
         </div>
-        <div className="log-btn">
-          <button className="log-btn" onClick={handleLogin}>
-            {loading ? (
-              <div className="loader">
-                <ThreeDots
-                  height="40"
-                  width="40"
-                  radius="9"
-                  color="black"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClassName=""
-                  visible={true}
-                />
-              </div>
-            ) : (
-              "Login"
-            )}
-          </button>
-        </div>
-        <div className="log-not-reg">Not registered yet ?</div>
-        <div className="log-btn">
-          <button onClick={handleReg} className="log-btn">
-            Register
-          </button>
-        </div>
-        <div className="log-btn">
-          <button
-            onClick={() => {
-              navigate("/Admin");
-            }}
-            className="log-btn"
-          >
-            Admin
-          </button>
-        </div>
+
+        <button className="log-btn1" onClick={handleLogin}>
+          {loading ? (
+            <div className="loader">
+              <ThreeDots
+                height="30"
+                width="40"
+                radius="9"
+                color="black"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </div>
+          ) : (
+            <div className="log-text">Login</div>
+          )}
+        </button>
+
+        <div className="log-not-reg">Hey not yet registered ?</div>
+
+        <button onClick={handleReg} className="log-btn1">
+          Register
+        </button>
+
+        <button
+          onClick={() => {
+            navigate("/Admin");
+          }}
+          className="log-btn1"
+        >
+          Admin
+        </button>
       </div>
     </div>
   );
