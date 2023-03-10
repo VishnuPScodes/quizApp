@@ -5,6 +5,10 @@ import { Question } from '../pages/Quesiton'
 import { PrivateRoutes } from './PrivateRoutes'
 import { Graph } from './Grapgh/Graph'
 import { Admin } from '../pages/Admin/Admin'
+import { Welcome } from '../pages/welcome/Welcome'
+import { Mystats } from '../pages/Mystats/Mystats'
+import { Hallofame } from '../pages/Wholeofame/Hallofame'
+
 
 
 export const Allroutes=()=>{
@@ -15,14 +19,17 @@ export const Allroutes=()=>{
           path="/"
           element={
             <PrivateRoutes>
-              <Question />
+              <Welcome />
             </PrivateRoutes>
           }
         />
+        <Route path="/quiz" element={<Question />} />
         <Route path="/reg" element={<Reg />} />
         <Route path="/graph" element={<Graph />} />
         <Route path="/Log" element={<Log />} />
         <Route path="/Admin" element={<Admin />} />
+        <Route path="/mystats" element={<Mystats />} />
+        <Route path="/hallofame" element={<Hallofame/>} />
       </Routes>
     );
 }

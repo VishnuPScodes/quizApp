@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
  
+  addId,
   addScore,
   addToken,
   addUserScore,
@@ -40,20 +41,22 @@ export const Log = () => {
   const handleLogin = () => {
     dispatch(authRequest());
     axios
-      .post("http://localhost:3000/log", data)
+      .post("https://crocodile-scrubs.cyclic.app/log", data)
       .then((res) => {
         if (res.data.token) {
           dispatch(authSuccess());
           dispatch(addToken(res.data.token));
-          console.log(res.data.data.score)
-          dispatch(addUserScore(res.data.data.score))
+          dispatch(addId(res.data.data._id));
+
+          console.log(res.data.data.score);
+          dispatch(addUserScore(res.data.data.score));
           alert("login successful");
           navigate("/");
         }
       })
       .catch((er) => {
         dispatch(authFailure());
-        console.log('er',er)
+        console.log("er", er);
         alert("something went wrong");
         console.log(er);
       });

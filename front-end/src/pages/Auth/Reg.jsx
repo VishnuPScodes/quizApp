@@ -21,11 +21,11 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post("http://localhost:3000/reg", data)
+      .post("https://crocodile-scrubs.cyclic.app/reg", data)
       .then((res) => {
         if (res.data == "exists") {
           alert("User already exists ,Please sign in");
-          setLoading(false)
+          setLoading(false);
         } else {
           setLoading(false);
           alert("Registered");

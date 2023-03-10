@@ -15,14 +15,14 @@ export const Admin = () => {
  
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin")
+      .get("https://crocodile-scrubs.cyclic.app/admin")
       .then((e) => {
         setData(e.data);
       })
       .then(() => {
         setLoader(false);
       });
-    axios.get("http://localhost:3000/questbank").then((e) => {
+    axios.get("https://crocodile-scrubs.cyclic.app/questbank").then((e) => {
       setCount(e.data);
     });
   }, []);
@@ -102,12 +102,12 @@ export const Admin = () => {
                 <input
                   className="check-box"
                   onChange={() => {
-                    axios.get("http://localhost:3000/questbank").then((e) => {
+                    axios.get("https://crocodile-scrubs.cyclic.app/questbank").then((e) => {
                       setCount(e.data);
                     });
                     if (count.length < 10) {
                       axios
-                        .post("http://localhost:3000/questbank", e)
+                        .post("https://crocodile-scrubs.cyclic.app/questbank", e)
                         .then((e) => {})
                         .catch((er) => {
                           console.log(er);
@@ -135,11 +135,11 @@ export const Admin = () => {
                     gk.push(h);
                   }
                 });
-                axios.post("http://localhost:3000/questbank", gk);
+                axios.post("https://crocodile-scrubs.cyclic.app/questbank", gk);
                 navigate("/");
               }}
             >
-              Generate link
+              Add Questions
             </button>
           </div>
         </div>

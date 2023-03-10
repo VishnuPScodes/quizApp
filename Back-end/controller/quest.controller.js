@@ -39,7 +39,7 @@ router.post("/:id", async (req, res) => {
     const single = await Quest.findById(req.params.id).lean().exec();
     //getting the difficulty level of the current question
 
-    let difficulty = single.difficulty;
+    let difficulty = single?.difficulty;
     //getting the question with the greater difficulty
 
     let questionToSend = await Quest.findOne({

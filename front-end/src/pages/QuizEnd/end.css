@@ -45,6 +45,8 @@
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
    background-color: cornsilk;
    transition: 1s;
+   display: flex;
+   justify-content: center;
 }
 .save-btn:hover{
   cursor: pointer;
@@ -56,6 +58,7 @@
   margin: auto;
   margin-bottom: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
 }
 .line {
   height: 30px;

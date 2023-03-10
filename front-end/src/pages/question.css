@@ -114,6 +114,13 @@
   display: flex;
   justify-content: space-around;
 }
+.quiz-add-text{
+  font-family: "Poppins";
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  
+}
 .user-name {
   font-family: "Poppins";
   font-weight: 600;
@@ -169,11 +176,13 @@
   align-items: center;
   padding-left: 10px;
 }
+.loader-spinner{
 
+}
 .q-1:hover {
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+  
+  background-color: aliceblue;
   cursor: pointer;
 }
 .star-box {
@@ -194,7 +203,7 @@
   font-weight: 500;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 840px) {
   /* CSS for mobile screen */
   .second {
     display: block;
@@ -202,4 +211,20 @@
   .first {
     display: block;
   }
+  .all-container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+
+}
+
+.over-score{
+  text-align: center;
+  font-family: 'Poppins';
+  font-size: 16px;
+}
+.stats-cont{
+  display: flex;
+  justify-content: space-around;
+}
 }

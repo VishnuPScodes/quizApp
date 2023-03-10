@@ -1,3 +1,4 @@
+
 import { authActions } from "./action";
 
 const initState = {
@@ -6,7 +7,10 @@ const initState = {
   loading: false,
   scores: [],
   token: "",
-  userScore:""
+  userScore:"",
+  userId:"",
+  besttime:0
+
 };
 
 export const authReducer = (state = initState, action) => {
@@ -22,6 +26,13 @@ export const authReducer = (state = initState, action) => {
       return {
         ...state,
         auth: true,
+        loading: false,
+      };
+    }
+    case authActions.LOGOUT: {
+      return {
+        ...state,
+        auth: false,
         loading: false,
       };
     }
@@ -55,6 +66,19 @@ export const authReducer = (state = initState, action) => {
         userScore: action.payload,
       };
     }
+    case authActions.ADD_BEST_TIME: {
+      return {
+        ...state,
+        besttime: action.payload,
+      };
+    }
+    case authActions.ADD_ID: {
+      return {
+        ...state,
+        userId: action.payload,
+      };
+    }
+
     default:
       return state;
   }
