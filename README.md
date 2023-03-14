@@ -35,4 +35,4 @@ Start the server
 
 here is the deployed link
 ```
-[https://bright-liger-665af8.netlify.app](https://quiz-app-vishnupscodes.netlify.app/)
+https://quiz-app-vishnupscodes.netlify.app/
