@@ -7,7 +7,7 @@ import logController from "./controller/log.controller.js";
 import queController from "./controller/question.controller.js";
 import adminController from "./controller/admin.controller.js";
 import questBankController from "./controller/quest.controller.js";
-import hallofameController from './controller/hallofame.controller.js'; 
+import hallofameController from './controller/hallofame.controller.js';
 import cors from "cors";
 
 const app = express();
@@ -24,7 +24,7 @@ app.use("/reg", regController);
 app.use("/log", logController);
 app.use("/question", queController);
 app.use("/admin", adminController);
-app.use('/hallofame',hallofameController);
+app.use('/hallofame', hallofameController);
 const PORT = process.env.PORT;
 app.listen(PORT, async (req, res) => {
   try {
