@@ -7,15 +7,15 @@ const newToken = (regData) => {
 };
 
 const router = express.Router();
-router.get('/:id',async(req,res)=>{
-  console.log('heree')
-  try {
-    const data=await Reg.findById(req.params.id);
-    res.status(200).send(data)
-  } catch (error) {
-    res.status(400).send("error")
-  }
-})
+// router.get('/:id',async(req,res)=>{
+//   console.log('heree')
+//   try {
+//     const data=await Reg.findById(req.params.id);
+//     res.status(200).send(data)
+//   } catch (error) {
+//     res.status(400).send("error")
+//   }
+// })
 
 router.post("/score/:id",async(req,res)=>{  
   console.log('here');
