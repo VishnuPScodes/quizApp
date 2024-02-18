@@ -61,14 +61,23 @@ export class QuestionsToUserRepository {
     return question;
   }
 
+  async getQuestionWithLessDifficultyLevel(difficultyLevel, userId) {
+    const question = await this._liveQuestionModel.findOne({
+      userId,
+      difficulty: { $lt: Number(difficultyLevel) },
+    });
+
+    return question;
+  }
+
   async getOneLiveQuestion(questionId) {
     const question = await this._model.findOne({ _id: questionId });
 
     return question;
   }
 
-  async deleteQuestion(questionId) {
-    const question = await this._model.findOneAndDelete({ _id: questionId });
+  async deleteAllQuestionForTheUser(userId) {
+    const question = await this._liveQuestionModel.deleteMany({ userId });
 
     return question;
   }
