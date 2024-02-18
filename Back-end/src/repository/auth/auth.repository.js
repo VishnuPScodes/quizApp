@@ -1,6 +1,6 @@
 import User from '../../models/user.model.js';
 
-export class UserRegistrationRepository {
+export class UserAuthRepository {
   constructor() {
     this._model = User;
   }
@@ -20,11 +20,12 @@ export class UserRegistrationRepository {
   }
 
   async isUserAlreadyExists(email) {
-    const user = this._model.findOne({ email });
-    if (user) {
-      return true;
+    const user = await this._model.findOne({ email });
+    console.log('user', user);
+    if (!user) {
+      return false;
     }
 
-    return false;
+    return user;
   }
 }

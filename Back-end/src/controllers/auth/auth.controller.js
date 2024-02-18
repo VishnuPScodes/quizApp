@@ -2,7 +2,7 @@ import express from 'express';
 //import Reg from '../models/reg.model.js';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { UserAuthServices_ } from '../../services/auth/userRegistration.service.js';
+import { UserAuthServices_ } from '../../services/auth/userAuth.service.js';
 const newToken = (regData) => {
   return jwt.sign({ regData }, process.env.JWT_SECRET_KEY);
 };
@@ -35,6 +35,12 @@ export const registerUser = async (req, res) => {
   });
 };
 
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  const token = await UserAuthServices_.userLogin({ password, email });
+
+  res.send({ token, status: 'Logged in' });
+};
 // router.post('/score/:id', async (req, res) => {
 //   console.log('here');
 

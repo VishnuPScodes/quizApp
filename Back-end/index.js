@@ -30,6 +30,7 @@ app.use('/auth', authRouter);
 const PORT = process.env.PORT;
 app.listen(PORT, async (req, res) => {
   try {
+    console.log('here');
     await mongoose.connect(process.env.URL);
     console.log('listening to the port ' + PORT);
   } catch (error) {
