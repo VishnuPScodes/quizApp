@@ -1,7 +1,7 @@
 
 # Adaptive quiz system
 
-A simple quiz app were admin will be able to add questions and user will be able to participate after login in.
+A simple quiz app where admin will be able to add questions and user will be able to participate after login in.
 
 
 ## Run Locally
