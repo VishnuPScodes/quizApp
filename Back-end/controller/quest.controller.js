@@ -1,35 +1,35 @@
-import express from "express";
-import Quest from "../models/quest.model.js";
-import bcrypt from "bcryptjs";
+import express from 'express';
+import Quest from '../models/quest.model.js';
+import bcrypt from 'bcryptjs';
 const router = express.Router();
 
 //trying to get all the questions in the questionbank cluster
 
-router.get("", async (req, res) => {
-  try {
-    const data = await Quest.find().lean().exec();
-    res.status(200).send(data);
-  } catch (error) {
-    res.status(404).send(error);
-  }
-});
+// router.get("", async (req, res) => {
+//   try {
+//     const data = await Quest.find().lean().exec();
+//     res.status(200).send(data);
+//   } catch (error) {
+//     res.status(404).send(error);
+//   }
+// });
 
 //posting questions from the admin page to the user ,so that user can access it on the quiz page
 
-router.post("", async (req, res) => {
-  try {
-    const data = await Quest.create(req.body);
-    res.send("posted");
-  } catch (error) {
-    res.send(error);
-  }
-});
+// router.post("", async (req, res) => {
+//   try {
+//     const data = await Quest.create(req.body);
+//     res.send("posted");
+//   } catch (error) {
+//     res.send(error);
+//   }
+// });
 
 //checking weather answer is correct or not
 //if correct =>send the question with the greater difficulty level
 //if wrong => send the question with the lesser difficulty level
 
-router.post("/:id", async (req, res) => {
+router.post('/:id', async (req, res) => {
   let ans = req.query.q;
 
   const data = await Quest.findById(req.params.id).lean().exec();
@@ -76,7 +76,7 @@ router.post("/:id", async (req, res) => {
 
 //getting a single question from the questionbank collection
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     //getting the question of given id
     const data = await Quest.findById(req.params.id).lean().exec();
@@ -92,10 +92,10 @@ router.get("/:id", async (req, res) => {
 
 //removing all the questions from  question bank
 
-router.delete("", async (req, res) => {
+router.delete('', async (req, res) => {
   try {
     const data = await Quest.remove();
-    res.send("removed");
+    res.send('removed');
   } catch (error) {
     console.log(error);
   }
