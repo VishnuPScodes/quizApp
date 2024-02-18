@@ -1,4 +1,5 @@
 import { UserAuthRepository } from '../../repository/auth/auth.repository.js';
+import { BadRequestError } from '../../utils/response/error.js';
 import { newToken } from '../../utils/token.js';
 
 class UserAuthServices {
@@ -9,7 +10,7 @@ class UserAuthServices {
   async getUserData(userId) {
     const user = await this._userAuthRepository.getUserData(userId);
     if (!user) {
-      throw new Error('User not found!');
+      throw new BadRequestError('User not found!');
     }
 
     return user;
@@ -20,20 +21,23 @@ class UserAuthServices {
     const alreadyUser = await this._userAuthRepository.isUserAlreadyExists(
       email
     );
-    console.log('already', alreadyUser);
     if (alreadyUser) {
-      throw new Error('Bad Request Error ,user exists');
+      throw new BadRequestError('User already exists!');
     }
-    const user = this._userAuthRepository.registerUser({
+    const user = await this._userAuthRepository.registerUser({
       password,
       name,
       email,
     });
     if (!user) {
-      throw new Error('Not able to create the user');
+      throw new BadRequestError('Not able to create the user');
     }
+    const token = newToken();
 
-    return user;
+    return {
+      token,
+      user,
+    };
   }
 
   async userLogin(params) {
@@ -43,11 +47,11 @@ class UserAuthServices {
     );
 
     if (!alreadyUser) {
-      throw new Error('Bad Request Error ,user does not exists');
+      throw new BadRequestError('User does not exists with this email id');
     }
     const match = alreadyUser.checkPassword(password);
     if (!match) {
-      throw new Error('Password does not match');
+      throw new BadRequestError('Password does not match');
     }
     const token = newToken();
 
