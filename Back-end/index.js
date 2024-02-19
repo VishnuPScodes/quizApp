@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 // import hallofameController from './controller/hallofame.controller.js';
 import authRouter from './src/routes/auth/auth.routes.js';
 import cors from 'cors';
+import questionRouter from './src/routes/questions.routes.js';
 
 const app = express();
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(cors());
 // app.use("/admin", adminController);
 // app.use('/hallofame', hallofameController);
 app.use('/auth', authRouter);
+app.use('/quiz', questionRouter);
 const PORT = process.env.PORT;
 app.listen(PORT, async (req, res) => {
   try {
