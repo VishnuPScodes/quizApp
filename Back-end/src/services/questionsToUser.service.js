@@ -1,5 +1,4 @@
 import { BadRequestError } from '../../utils/response/error.js';
-import { newToken } from '../../utils/token.js';
 import { QuestionsToUserRepository } from '../repository/questionsToUser.repository.js';
 import { NotFoundError } from '../utils/response/error.js';
 import bcrypt from 'bcryptjs';
