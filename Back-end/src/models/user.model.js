@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   score: {
     type: Number,
-    default: 0,
+    default: null,
   },
   totalgamesplayed: {
     type: Number,

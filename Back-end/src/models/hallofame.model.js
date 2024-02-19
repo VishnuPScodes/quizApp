@@ -1,14 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
+const HallOfFameSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  score: {
+    type: Number,
+  },
+});
 
-const HallofameSchema=new mongoose.Schema({
-    name:{
-        type:String,
-    },
-    score:{
-        type:Number
-    }
-})
+const HallOfFameModel = mongoose.model('halloffame', HallOfFameSchema);
 
- const WFF=mongoose.model('wholeofame',HallofameSchema)
-export default WFF 
+export default HallOfFameModel;
