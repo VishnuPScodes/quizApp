@@ -1,5 +1,4 @@
 import User from '../../models/user.model.js';
-import HallOfFameModel from '../models/hallofame.model.js';
 
 export class HallOfFameRepository {
   constructor() {
@@ -10,7 +9,7 @@ export class HallOfFameRepository {
     const users = this._model.aggregate([
       {
         $match: {
-          score: { $ne: null },
+          score: { $ne: 0 },
         },
       },
       {

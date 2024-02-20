@@ -1,18 +1,18 @@
-import "./question.css";
-import { AiFillStar } from "react-icons/ai";
-import { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { QuizEnd } from "./QuizEnd/QuizEnd";
-import { Audio } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
-import { addScore } from "../redux/action";
-import { Progress } from "@chakra-ui/react";
-import { MdTimer } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
+import './question.css';
+import { AiFillStar } from 'react-icons/ai';
+import { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
+import { QuizEnd } from './QuizEnd/QuizEnd';
+import { Audio } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { addScore } from '../redux/action';
+import { Progress } from '@chakra-ui/react';
+import { MdTimer } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { Spinner } from '@chakra-ui/react';
 export const Question = () => {
   const userScore = useSelector((state) => state.userScore);
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
   const [single, setSingle] = useState(1);
   const [dfl, setDfl] = useState(5);
   //if no question available => making a state to detect that
@@ -43,7 +43,9 @@ export const Question = () => {
 
   useEffect(() => {
     axios
-      .get("https://crocodile-scrubs.cyclic.app/questbank/6356d83fcf8e99fdef105f23")
+      .get(
+        'https://crocodile-scrubs.cyclic.app/questbank/6356d83fcf8e99fdef105f23'
+      )
       .then((e) => {
         let data = e.data;
         setSingle(data);
@@ -59,16 +61,17 @@ export const Question = () => {
   //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
-     setLoading(true);
+    setLoading(true);
     axios
-      .post(`https://crocodile-scrubs.cyclic.app/questbank/${single._id}?q=${ans}`)
+      .post(
+        `https://crocodile-scrubs.cyclic.app/questbank/${single._id}?q=${ans}`
+      )
       .then((e) => {
-       
-        if (e.data == "") {
+        if (e.data == '') {
           setind(-1);
-          setLoading(false)
+          setLoading(false);
         } else {
-          setLoading(false)
+          setLoading(false);
           let response = e.data;
           let resDifficulty = response.difficulty;
           setDfl(resDifficulty);
@@ -107,7 +110,7 @@ export const Question = () => {
       ) : (
         <div>
           <div className="cont-que">
-            {" "}
+            {' '}
             {count == 10 ? (
               <QuizEnd timeTaken={timer} score={score} />
             ) : (
@@ -123,19 +126,16 @@ export const Question = () => {
                           {loading && (
                             <div className="loader-spinner">
                               <Spinner
-                               
                                 speed="0.65s"
                                 emptyColor="gray"
-                               
                                 size="xl"
-                               
                                 style={{
-                                  height: "50px",
-                                  width: "50px",
-                                  position: "absolute",
-                                  top: "30%",
-                                  left: "40%",
-                                  zIndex:"3"
+                                  height: '50px',
+                                  width: '50px',
+                                  position: 'absolute',
+                                  top: '30%',
+                                  left: '40%',
+                                  zIndex: '3',
                                 }}
                               />
                             </div>
@@ -149,11 +149,11 @@ export const Question = () => {
                                 </div>
                                 <div className="star-box">
                                   {Array(10)
-                                    .fill("")
+                                    .fill('')
                                     .map((_, i) => (
                                       <AiFillStar
                                         key={i}
-                                        color={i < dfl ? "red" : "gray"}
+                                        color={i < dfl ? 'red' : 'gray'}
                                       />
                                     ))}
                                 </div>
@@ -228,7 +228,7 @@ export const Question = () => {
                         </div>
                         <div
                           onClick={() => {
-                            navigate("/admin");
+                            navigate('/admin');
                           }}
                           className="save-btn"
                         >
