@@ -1,13 +1,15 @@
-import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { authRequest } from "../../redux/action";
-import { ThreeDots } from "react-loader-spinner";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import "./auth.css";
+import axios from 'axios';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { authRequest } from '../../redux/action';
+import { ThreeDots } from 'react-loader-spinner';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import './auth.css';
+import { useToast } from '@chakra-ui/react';
 
 export const Reg = () => {
+  const toast = useToast();
   //useDispatch hook to dispatch actions to redux
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -21,22 +23,22 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post("https://crocodile-scrubs.cyclic.app/reg", data)
+      .post('http://localhost:4001/auth/register', data)
       .then((res) => {
-        if (res.data == "exists") {
-          alert("User already exists ,Please sign in");
-          setLoading(false);
-        } else {
-          setLoading(false);
-          alert("Registered");
-          navigate("/log");
-        }
+        setLoading(false);
+        alert('Registered');
+        navigate('/log');
       })
       .catch((er) => {
         setLoading(false);
-
-        alert("something went wrong");
-        console.log("344", er);
+        alert(er.response.data.error);
+        toast({
+          title: 'Alert!',
+          description: 'Your message here.',
+          status: 'success',
+          duration: 3000, // 3 seconds
+          isClosable: true,
+        });
       });
   };
   return (
@@ -44,12 +46,12 @@ export const Reg = () => {
       <div className="log-main">
         <AiOutlineArrowLeft
           onClick={() => {
-            navigate("/log");
+            navigate('/log');
           }}
-          fontSize={"32px"}
+          fontSize={'32px'}
           style={{
-            paddingLeft: "20px",
-            paddingTop: "20px",
+            paddingLeft: '20px',
+            paddingTop: '20px',
           }}
         />
         <div className="welcome">Let's Register</div>
@@ -86,8 +88,8 @@ export const Reg = () => {
             <div className="loader">
               <ThreeDots
                 style={{
-                  textAlignL: "center",
-                  alignSelf: "center",
+                  textAlignL: 'center',
+                  alignSelf: 'center',
                 }}
                 height="25"
                 width="25"
@@ -100,7 +102,7 @@ export const Reg = () => {
               />
             </div>
           ) : (
-            "Register"
+            'Register'
           )}
         </button>
       </div>

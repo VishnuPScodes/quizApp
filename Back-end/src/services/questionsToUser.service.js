@@ -16,6 +16,35 @@ class QuestionToUserServices {
     return allQuestions;
   }
 
+  async createQuestion(params) {
+    const {
+      id,
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      answer,
+      difficulty,
+    } = params;
+    const postedQuestion = await this._questionToUserRepository.createQuestion({
+      id,
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      answer,
+      difficulty,
+    });
+
+    if (!postedQuestion) {
+      throw new BadRequestError('Could not post the question');
+    }
+
+    return postedQuestion;
+  }
+
   async getUserQuestions(userId) {
     const questions = await this._questionToUserRepository.getUserQuestions(
       userId

@@ -37,9 +37,9 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const token = await UserAuthServices_.userLogin({ password, email });
+  const loginResponse = await UserAuthServices_.userLogin({ password, email });
 
-  res.send({ token, status: 'Logged in' });
+  res.send(loginResponse);
 };
 // router.post('/score/:id', async (req, res) => {
 //   console.log('here');

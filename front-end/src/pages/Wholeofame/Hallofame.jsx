@@ -1,19 +1,19 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import styles from "./whole.module.css";
-import { Audio } from "react-loader-spinner";
-import ParticlesBg from "particles-bg";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import styles from './whole.module.css';
+import { Audio } from 'react-loader-spinner';
+import ParticlesBg from 'particles-bg';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 export const Hallofame = () => {
   const [loader, setLoader] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     setLoader(true);
     axios
-      .get(`https://crocodile-scrubs.cyclic.app/hallofame`)
+      .get(`http://localhost:4001/hallofame`)
       .then((res) => {
         let infos = res.data;
         infos = infos.sort((a, b) => b.score - a.score);
@@ -31,21 +31,21 @@ export const Hallofame = () => {
       <div className={styles.cont}>
         <AiOutlineArrowLeft
           onClick={() => {
-            navigate("/");
+            navigate('/');
           }}
-          fontSize={"32px"}
+          fontSize={'32px'}
           style={{
-            paddingLeft: "20px",
-            paddingTop: "20px",
+            paddingLeft: '20px',
+            paddingTop: '20px',
           }}
         />
         <div className={styles.head}> Hall of fame!</div>
         {loader == true ? (
           <div
             style={{
-              width: "100px",
-              height: "3px",
-              margin: "auto",
+              width: '100px',
+              height: '3px',
+              margin: 'auto',
             }}
           >
             <Audio

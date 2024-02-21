@@ -20,6 +20,31 @@ export const getQuestionById = async (req, res) => {
   res.send(question);
 };
 
+export const createQuestion = async (req, res) => {
+  const {
+    id,
+    question,
+    option1,
+    option2,
+    option3,
+    option4,
+    answer,
+    difficulty,
+  } = req.body;
+  const postedQuestion = await QuestionToUserServices_.createQuestion({
+    id,
+    question,
+    option1,
+    option2,
+    option3,
+    option4,
+    answer,
+    difficulty,
+  });
+
+  res.send(postedQuestion);
+};
+
 export const postQuestionForOneUserByAdmin = async (req, res) => {
   const userId = req.params.userI;
   const {

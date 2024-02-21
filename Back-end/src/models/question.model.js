@@ -21,7 +21,7 @@ const questionSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  option3: {
+  option4: {
     type: String,
     required: true,
   },
@@ -31,10 +31,6 @@ const questionSchema = mongoose.Schema({
   },
   difficulty: {
     type: Number,
-    required: true,
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
 });

@@ -1,5 +1,5 @@
 import QuestionModel from '../models/question.model.js';
-import LiveQuestionModel from '../models/quest.model.js';
+import LiveQuestionModel from '../models/liveQuestions.model.js';
 
 export class QuestionsToUserRepository {
   constructor() {
@@ -11,6 +11,31 @@ export class QuestionsToUserRepository {
     const questions = this._model.find().lean();
 
     return questions;
+  }
+
+  async createQuestion(params) {
+    const {
+      id,
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      answer,
+      difficulty,
+    } = params;
+    const postedQuestion = await QuestionModel.create({
+      id,
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      answer,
+      difficulty,
+    });
+
+    return postedQuestion;
   }
 
   async getUserQuestions(userId) {

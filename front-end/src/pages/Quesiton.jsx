@@ -43,9 +43,7 @@ export const Question = () => {
 
   useEffect(() => {
     axios
-      .get(
-        'https://crocodile-scrubs.cyclic.app/questbank/6356d83fcf8e99fdef105f23'
-      )
+      .get('http://localhost:4001/questbank/6356d83fcf8e99fdef105f23')
       .then((e) => {
         let data = e.data;
         setSingle(data);
@@ -63,9 +61,7 @@ export const Question = () => {
   const handleCheck = (ans) => {
     setLoading(true);
     axios
-      .post(
-        `https://crocodile-scrubs.cyclic.app/questbank/${single._id}?q=${ans}`
-      )
+      .post(`http://localhost:4001/questbank/${single._id}?q=${ans}`)
       .then((e) => {
         if (e.data == '') {
           setind(-1);

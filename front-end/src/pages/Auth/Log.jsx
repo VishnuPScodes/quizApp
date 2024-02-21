@@ -1,9 +1,8 @@
-import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
- 
   addId,
   addScore,
   addToken,
@@ -11,14 +10,15 @@ import {
   authFailure,
   authRequest,
   authSuccess,
-} from "../../redux/action";
-import { ThreeDots } from "react-loader-spinner";
-import "./auth.css";
-import Particles from "particles.js";
+} from '../../redux/action';
+import { ThreeDots } from 'react-loader-spinner';
+import './auth.css';
+import { useToast } from '@chakra-ui/react';
 
-import ParticlesBg from "particles-bg";
+import ParticlesBg from 'particles-bg';
 
 export const Log = () => {
+  const toast = useToast();
   //taking loading from the redux store
   const loading = useSelector((state) => state.loading);
   //getting useDispatch hook to connect with the redux from react
@@ -33,32 +33,37 @@ export const Log = () => {
   //function to take the user to the registration page
 
   const handleReg = () => {
-    navigate("/reg");
+    navigate('/reg');
   };
 
   //using the data from the form to make a post request to the backend to confirm the authentication
 
   const handleLogin = () => {
+    toast({
+      title: 'Alert!',
+      description: 'Your message here.',
+      status: 'success',
+      duration: 3000, // 3 seconds
+      isClosable: true,
+    });
     dispatch(authRequest());
     axios
-      .post("https://crocodile-scrubs.cyclic.app/log", data)
+      .post('http://localhost:4001/auth/login', data)
       .then((res) => {
-        if (res.data.token) {
-          dispatch(authSuccess());
-          dispatch(addToken(res.data.token));
-          dispatch(addId(res.data.data._id));
+        console.log('into then');
+        console.log('ress', res.data.token);
+        dispatch(authSuccess());
+        dispatch(addToken(res.data.token));
+        dispatch(addId(res.data.data._id));
 
-          console.log(res.data.data.score);
-          dispatch(addUserScore(res.data.data.score));
-          alert("login successful");
-          navigate("/");
-        }
+        dispatch(addUserScore(res.data.user.score));
+        alert('login successful');
+        navigate('/');
       })
       .catch((er) => {
         dispatch(authFailure());
-        console.log("er", er);
-        alert("something went wrong");
-        console.log(er);
+        alert(er.response.data.error);
+        console.log('eer', er.response.data.error);
       });
   };
 
@@ -71,7 +76,7 @@ export const Log = () => {
 
   return (
     <div>
-      <ParticlesBg  type="cobweb" bg={true} />
+      <ParticlesBg type="cobweb" bg={true} />
       <div className="log-main">
         <div className="welcome">Let's login</div>
         <div className="log-input">
@@ -120,7 +125,7 @@ export const Log = () => {
 
         <button
           onClick={() => {
-            navigate("/Admin");
+            navigate('/Admin');
           }}
           className="log-btn1"
         >

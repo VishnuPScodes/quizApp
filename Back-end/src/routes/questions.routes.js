@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+  createQuestion,
   getAllQuestions,
   getQuestionById,
   getUserQuestions,
@@ -13,15 +14,16 @@ import asyncHandler from '../utils/asyncHandler.js';
 const questionRouter = express.Router();
 
 questionRouter.get('/questions', asyncHandler(getAllQuestions));
+questionRouter.post('/question', asyncHandler(createQuestion));
 questionRouter.get('/question/:questionId', asyncHandler(getQuestionById));
-questionRouter.get('/userQuestions', asyncHandler(getUserQuestions));
+questionRouter.get('/userQuestions/:userId', asyncHandler(getUserQuestions));
 questionRouter.post('/nextQuestion', asyncHandler(userResponseEvaluation));
 questionRouter.post(
   '/postQuestion/:userId',
   asyncHandler(postQuestionForOneUserByAdmin)
 );
 questionRouter.delete(
-  '/removeAllQuestions',
+  '/removeAllQuestions/:userId',
   asyncHandler(removeAllQuestionsPerUser)
 );
 

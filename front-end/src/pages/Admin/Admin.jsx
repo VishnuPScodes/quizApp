@@ -1,9 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import "./admin.css";
-import { Audio } from "react-loader-spinner";
- import { AiOutlineArrowLeft } from "react-icons/ai";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import './admin.css';
+import { Audio } from 'react-loader-spinner';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 export const Admin = () => {
   //useNavigate hook to navigate to different routes
   const navigate = useNavigate();
@@ -11,22 +11,22 @@ export const Admin = () => {
   const [loader, setLoader] = useState(true);
   const [count, setCount] = useState([]);
   const [data, setData] = useState([]);
-  const [generatedQuestion,setGeneratedQuestion]=useState([]);
- 
+  const [generatedQuestion, setGeneratedQuestion] = useState([]);
+
   useEffect(() => {
     axios
-      .get("https://crocodile-scrubs.cyclic.app/admin")
+      .get('http://localhost:4001/admin')
       .then((e) => {
         setData(e.data);
       })
       .then(() => {
         setLoader(false);
       });
-    axios.get("https://crocodile-scrubs.cyclic.app/questbank").then((e) => {
+    axios.get('http://localhost:4001/questbank').then((e) => {
       setCount(e.data);
     });
   }, []);
- 
+
   return (
     <div>
       {loader == true ? (
@@ -44,17 +44,21 @@ export const Admin = () => {
         </div>
       ) : (
         <div className="main-admin">
-          <AiOutlineArrowLeft onClick={(()=>{
-            navigate('/')
-          })}  fontSize={'32px'} style={{
-            paddingLeft:'20px',
-            paddingTop:"20px"
-          }} />
-          <div style={{ marginLeft: "5%" }}>
+          <AiOutlineArrowLeft
+            onClick={() => {
+              navigate('/');
+            }}
+            fontSize={'32px'}
+            style={{
+              paddingLeft: '20px',
+              paddingTop: '20px',
+            }}
+          />
+          <div style={{ marginLeft: '5%' }}>
             <div className="header">
-              {" "}
+              {' '}
               <div className="welocme-to-admin-page">Welcome to admin page</div>
-              <div className="select-10-ques">Select 10 questions</div>{" "}
+              <div className="select-10-ques">Select 10 questions</div>{' '}
             </div>
           </div>
 
@@ -83,31 +87,31 @@ export const Admin = () => {
                 }}
                 className="single-q"
                 style={{
-                  minheight: "60px",
-                  width: "90%",
-                  margin: "auto",
-                  backgroundColor: !e.disabled ? "antiquewhite" : "cornsilk",
-                  marginTop: "15px",
-                  fontSize: "16px",
-                  borderRadius: "10px",
-                  textAlign: "center",
-                  fontFamily: "Poppins",
-                  fontSize: "18px",
-                  lineHeight: "24px",
+                  minheight: '60px',
+                  width: '90%',
+                  margin: 'auto',
+                  backgroundColor: !e.disabled ? 'antiquewhite' : 'cornsilk',
+                  marginTop: '15px',
+                  fontSize: '16px',
+                  borderRadius: '10px',
+                  textAlign: 'center',
+                  fontFamily: 'Poppins',
+                  fontSize: '18px',
+                  lineHeight: '24px',
                   boxShadow: e.disabled
-                    ? " box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                    : "",
+                    ? ' box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px'
+                    : '',
                 }}
               >
                 <input
                   className="check-box"
                   onChange={() => {
-                    axios.get("https://crocodile-scrubs.cyclic.app/questbank").then((e) => {
+                    axios.get('http://localhost:4001/questbank').then((e) => {
                       setCount(e.data);
                     });
                     if (count.length < 10) {
                       axios
-                        .post("https://crocodile-scrubs.cyclic.app/questbank", e)
+                        .post('http://localhost:4001/questbank', e)
                         .then((e) => {})
                         .catch((er) => {
                           console.log(er);
@@ -135,8 +139,8 @@ export const Admin = () => {
                     gk.push(h);
                   }
                 });
-                axios.post("https://crocodile-scrubs.cyclic.app/questbank", gk);
-                navigate("/");
+                axios.post('http://localhost:4001/questbank', gk);
+                navigate('/');
               }}
             >
               Add Questions
