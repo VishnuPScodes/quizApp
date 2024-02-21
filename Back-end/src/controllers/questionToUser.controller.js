@@ -1,4 +1,4 @@
-import { QuestionToUserServices_ } from '../services/questionsToUser.service';
+import { QuestionToUserServices_ } from '../services/questionsToUser.service.js';
 
 export const getAllQuestions = async (req, res) => {
   const questions = await QuestionToUserServices_.getAllQuestions();

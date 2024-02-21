@@ -11,6 +11,7 @@ import dotenv from 'dotenv';
 import authRouter from './src/routes/auth/auth.routes.js';
 import cors from 'cors';
 import questionRouter from './src/routes/questions.routes.js';
+import hallOfFameRouter from './src/routes/hallOfFame.routes.js';
 
 const app = express();
 dotenv.config();
@@ -29,6 +30,8 @@ app.use(cors());
 // app.use('/hallofame', hallofameController);
 app.use('/auth', authRouter);
 app.use('/quiz', questionRouter);
+app.use('/halloffame', hallOfFameRouter);
+
 const PORT = process.env.PORT;
 app.listen(PORT, async (req, res) => {
   try {

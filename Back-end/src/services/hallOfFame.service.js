@@ -1,5 +1,5 @@
-import { BadRequestError } from '../../utils/response/error.js';
 import { HallOfFameRepository } from '../repository/hallOfFame.repository.js';
+import { BadRequestError } from '../utils/response/error.js';
 
 class HallOfFameServices {
   constructor() {
@@ -15,9 +15,7 @@ class HallOfFameServices {
     return users;
   }
 
-  async updateUserScore() {
-    const { userId } = req.params;
-    const { userScore } = Number(req.body);
+  async updateUserScore(userId, userScore) {
     const user = await this._hallOfFameServices.getUserScoreByUserId(userId);
 
     if (!userPreviousScore) {

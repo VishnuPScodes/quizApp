@@ -1,5 +1,5 @@
 import express from 'express';
-import asyncHandler from '../../utils/asyncHandler.js';
+
 import {
   getAllQuestions,
   getQuestionById,
@@ -7,7 +7,8 @@ import {
   postQuestionForOneUserByAdmin,
   removeAllQuestionsPerUser,
   userResponseEvaluation,
-} from '../controllers/questionToUser.controller';
+} from '../controllers/questionToUser.controller.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
 const questionRouter = express.Router();
 

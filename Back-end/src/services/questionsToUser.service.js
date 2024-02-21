@@ -1,6 +1,5 @@
-import { BadRequestError } from '../../utils/response/error.js';
 import { QuestionsToUserRepository } from '../repository/questionsToUser.repository.js';
-import { NotFoundError } from '../utils/response/error.js';
+import { NotFoundError, BadRequestError } from '../utils/response/error.js';
 import bcrypt from 'bcryptjs';
 
 class QuestionToUserServices {

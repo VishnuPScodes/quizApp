@@ -1,8 +1,8 @@
-import User from '../../models/user.model.js';
+import userModel from '../models/user.model.js';
 
 export class HallOfFameRepository {
   constructor() {
-    this._model = User;
+    this._model = userModel;
   }
 
   async getAllUsersWithSort() {
