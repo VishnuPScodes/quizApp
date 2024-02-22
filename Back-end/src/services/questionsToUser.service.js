@@ -107,10 +107,9 @@ class QuestionToUserServices {
       throw new BadRequestError('Question not found!');
     }
     const difficultyLevel = question.difficulty;
-    console.log({ difficultyLevel });
-    console.log(answer, question.answer);
+
     const isAnswerCorrect = bcrypt.compareSync(answer, question?.answer);
-    console.log({ isAnswerCorrect });
+
     if (isAnswerCorrect) {
       const questionWithMoreDifficulty =
         await this._questionToUserRepository.getQuestionWithMoreDifficultyLevel(
@@ -124,7 +123,7 @@ class QuestionToUserServices {
       await this._questionToUserRepository.getQuestionWithLessDifficultyLevel(
         difficultyLevel
       );
-    console.log({ questionWithLessDifficulty });
+
     return questionWithLessDifficulty;
   }
 

@@ -24,7 +24,8 @@ class HallOfFameServices {
     const userPreviousScore = user.score;
     const previousBestTime = user.bestTime;
     let totalGamesPlayed = user.totalgamesplayed + 1;
-    if (previousBestTime < time || !previousBestTime) {
+    console.log('total gems plaayed', totalGamesPlayed, user.totalgamesplayed);
+    if (previousBestTime < time) {
       time = previousBestTime;
     }
     if (userPreviousScore > userScore) {
@@ -36,6 +37,7 @@ class HallOfFameServices {
       time,
       totalGamesPlayed
     );
+
     if (!updatedUser) {
       throw new BadRequestError('Could not update the user score');
     }

@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
   },
   bestTime: {
     type: Number,
+    default: null,
   },
 });
 

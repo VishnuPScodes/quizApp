@@ -1,5 +1,5 @@
 import userModel from '../models/user.model.js';
-
+import mongoose, { ObjectId } from 'mongoose';
 export class HallOfFameRepository {
   constructor() {
     this._model = userModel;
@@ -23,17 +23,21 @@ export class HallOfFameRepository {
   }
 
   async getUserScoreByUserId(userId) {
-    const score = await this._model.findOne({ userId }).select('score');
+    const user = await this._model
+      .findOne({ _id: userId })
+      .select('score bestTime totalgamesplayed');
 
-    return score;
+    return user;
   }
 
   async updateUserScore(userId, score, time, totalgamesplayed) {
-    const user = await this._model.findOneAndUpdate(
-      { userId, score, bestTime: time, totalgamesplayed },
+    console.log('user id in....', userId);
+    const updatedUser = await this._model.findOneAndUpdate(
+      { _id: mongoose.Types.ObjectId(userId) },
+      { $set: { score, bestTime: time, totalgamesplayed } },
       { new: true }
     );
-    console.log({ user });
-    return user;
+    console.log('updated used ', updatedUser._id);
+    return updatedUser;
   }
 }

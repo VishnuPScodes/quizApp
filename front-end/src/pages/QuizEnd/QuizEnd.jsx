@@ -13,11 +13,13 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.userId);
   const [userData, setUserData] = useState([]);
-  console.log('user id', userId);
+
   useEffect(() => {
     axios.get(`http://localhost:4001/auth/profile/${userId}`).then((res) => {
       setUserData(res.data);
     });
+    console.log('score goott', score);
+    console.log('user id', userId);
     // axios
     //   .post(`http://localhost:4001/reg/played/${userId}?time=${timeTaken}`)
     //   .then((res) => {})
@@ -30,6 +32,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
     axios
       .patch(`http://localhost:4001/halloffame/update/${userId}`, {
         userScore: Number(score),
+        time: timeTaken,
       })
       .then((res) => {
         alert('Your score has been saved!');

@@ -43,10 +43,10 @@ export const createQuestion = async (req, res) => {
     answer,
     difficulty,
   });
-  console.log('post', postedQuestion);
   if (!postedQuestion) {
     throw new BadRequestError('Could not post the question');
   }
+
   res.send(postedQuestion);
 };
 

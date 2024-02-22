@@ -65,7 +65,6 @@ export const Mystats = () => {
           Play Quiz Game!
         </div>
       </div>
-      this is my stats
     </div>
   );
 };
