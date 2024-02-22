@@ -23,14 +23,17 @@ export class HallOfFameRepository {
   }
 
   async getUserScoreByUserId(userId) {
-    const score = this._model.findOne({ userId }).select('score');
+    const score = await this._model.findOne({ userId }).select('score');
 
     return score;
   }
 
-  async updateUserScore(userId, score) {
-    const user = this._model.findOneAndUpdate({ userId }, { score });
-
+  async updateUserScore(userId, score, time, totalgamesplayed) {
+    const user = await this._model.findOneAndUpdate(
+      { userId, score, bestTime: time, totalgamesplayed },
+      { new: true }
+    );
+    console.log({ user });
     return user;
   }
 }

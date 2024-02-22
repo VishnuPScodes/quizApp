@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  time: {
+  bestTime: {
     type: Number,
   },
 });

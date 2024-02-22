@@ -78,7 +78,7 @@ export class QuestionsToUserRepository {
   }
 
   async getQuestionWithMoreDifficultyLevel(difficultyLevel, userId) {
-    const question = await this._liveQuestionModel.findOne({
+    const question = await this._model.findOne({
       userId,
       difficulty: { $gt: Number(difficultyLevel) },
     });
@@ -86,12 +86,11 @@ export class QuestionsToUserRepository {
     return question;
   }
 
-  async getQuestionWithLessDifficultyLevel(difficultyLevel, userId) {
-    const question = await this._liveQuestionModel.findOne({
-      userId,
+  async getQuestionWithLessDifficultyLevel(difficultyLevel) {
+    const question = await this._model.findOne({
       difficulty: { $lt: Number(difficultyLevel) },
     });
-
+    console.log({ question });
     return question;
   }
 

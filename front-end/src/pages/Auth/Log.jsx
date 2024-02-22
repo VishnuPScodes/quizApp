@@ -54,7 +54,7 @@ export const Log = () => {
         console.log('ress', res.data.token);
         dispatch(authSuccess());
         dispatch(addToken(res.data.token));
-        dispatch(addId(res.data.data._id));
+        dispatch(addId(res.data.user._id));
 
         dispatch(addUserScore(res.data.user.score));
         alert('login successful');

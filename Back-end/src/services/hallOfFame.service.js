@@ -15,19 +15,26 @@ class HallOfFameServices {
     return users;
   }
 
-  async updateUserScore(userId, userScore) {
+  async updateUserScore(userId, userScore, time) {
     const user = await this._hallOfFameServices.getUserScoreByUserId(userId);
 
-    if (!userPreviousScore) {
+    if (!user) {
       throw new BadRequestError('Could not fetch the user!');
     }
     const userPreviousScore = user.score;
+    const previousBestTime = user.bestTime;
+    let totalGamesPlayed = user.totalgamesplayed + 1;
+    if (previousBestTime < time || !previousBestTime) {
+      time = previousBestTime;
+    }
     if (userPreviousScore > userScore) {
-      return [];
+      userScore = userPreviousScore;
     }
     const updatedUser = await this._hallOfFameServices.updateUserScore(
       userId,
-      userScore
+      userScore,
+      time,
+      totalGamesPlayed
     );
     if (!updatedUser) {
       throw new BadRequestError('Could not update the user score');

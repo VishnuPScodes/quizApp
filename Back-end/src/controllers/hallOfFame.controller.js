@@ -9,10 +9,11 @@ export const getUsersSortedByScore = async (req, res) => {
 export const updateUserScore = async (req, res) => {
   const { userId } = req.params;
   const userScore = Number(req.body.userScore);
-
+  const { time } = req.body;
   const updateUser = await HallOfFameServices_.updateUserScore(
     userId,
-    userScore
+    userScore,
+    time
   );
 
   res.send(updateUser);

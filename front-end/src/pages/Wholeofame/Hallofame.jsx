@@ -13,7 +13,7 @@ export const Hallofame = () => {
   useEffect(() => {
     setLoader(true);
     axios
-      .get(`http://localhost:4001/hallofame`)
+      .get(`http://localhost:4001/halloffame`)
       .then((res) => {
         let infos = res.data;
         infos = infos.sort((a, b) => b.score - a.score);

@@ -1,4 +1,5 @@
 import { QuestionToUserServices_ } from '../services/questionsToUser.service.js';
+import { BadRequestError } from '../utils/response/error.js';
 
 export const getAllQuestions = async (req, res) => {
   const questions = await QuestionToUserServices_.getAllQuestions();
@@ -21,6 +22,7 @@ export const getQuestionById = async (req, res) => {
 };
 
 export const createQuestion = async (req, res) => {
+  console.log('dfd');
   const {
     id,
     question,
@@ -41,7 +43,10 @@ export const createQuestion = async (req, res) => {
     answer,
     difficulty,
   });
-
+  console.log('post', postedQuestion);
+  if (!postedQuestion) {
+    throw new BadRequestError('Could not post the question');
+  }
   res.send(postedQuestion);
 };
 
@@ -74,11 +79,10 @@ export const postQuestionForOneUserByAdmin = async (req, res) => {
 };
 
 export const userResponseEvaluation = async (req, res) => {
-  const { questionId, answer, userId } = req.body;
+  const { questionId, answer } = req.body;
   const nextQuestion = await QuestionToUserServices_.userResponseEvaluation({
     questionId,
     answer,
-    userId,
   });
 
   res.send(nextQuestion);

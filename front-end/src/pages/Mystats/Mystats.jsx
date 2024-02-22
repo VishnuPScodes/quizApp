@@ -13,7 +13,7 @@ export const Mystats = () => {
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`http://localhost:4001/reg/${userId}`).then((res) => {
+    axios.get(`http://localhost:4001/auth/profile/${userId}`).then((res) => {
       setUserData(res.data);
     });
   }, []);
@@ -42,13 +42,13 @@ export const Mystats = () => {
             {' '}
             Total games played :{userData?.totalgamesplayed}
           </div>
-          <div className={styles.score}> Highest score :10 </div>
+          <div className={styles.score}> Highest score :{userData?.score} </div>
           <div className={styles.score}> Lowest score :1 </div>
           <div className={styles.score}>
             {' '}
             Your best time :
-            {userData?.time ? (
-              <div>{userData?.time}s</div>
+            {userData?.bestTime ? (
+              <div>{userData?.bestTime}s</div>
             ) : (
               'Not available yet!'
             )}{' '}

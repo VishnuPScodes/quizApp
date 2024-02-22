@@ -15,22 +15,22 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const [userData, setUserData] = useState([]);
   console.log('user id', userId);
   useEffect(() => {
-    axios.get(`http://localhost:4001/reg/${userId}`).then((res) => {
+    axios.get(`http://localhost:4001/auth/profile/${userId}`).then((res) => {
       setUserData(res.data);
     });
-    axios
-      .post(`http://localhost:4001/reg/played/${userId}?time=${timeTaken}`)
-      .then((res) => {})
-      .catch((err) => {
-        alert('There was an error saving your score:', err);
-        console.log(err);
-      });
+    // axios
+    //   .post(`http://localhost:4001/reg/played/${userId}?time=${timeTaken}`)
+    //   .then((res) => {})
+    //   .catch((err) => {
+    //     alert('There was an error saving your score:', err);
+    //     console.log(err);
+    //   });
   }, []);
   const handleSave = () => {
     axios
-      .post(
-        `http://localhost:4001/reg/score/${userId}?q=${score}&time=${timeTaken}`
-      )
+      .patch(`http://localhost:4001/halloffame/update/${userId}`, {
+        userScore: Number(score),
+      })
       .then((res) => {
         alert('Your score has been saved!');
         navigate('/');
@@ -39,29 +39,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
         alert('There was an error saving your score:', err);
         console.log(err);
       });
-    const postData = {
-      name: userData.name,
-      score: score,
-    };
-    axios
-      .post(`http://localhost:4001/hallofame`, postData)
-      .then((res) => {})
-      .catch((er) => {
-        console.log('error in posting the data to wholeofame', er);
-      });
   };
-  useEffect(() => {
-    axios
-      .delete('http://localhost:4001/questbank')
-      .then((e) => {
-        console.log(e.data);
-        //dispatching an action to remove all the score details from redux
-        dispatch(emptyScoreArray());
-      })
-      .catch((er) => {
-        console.log(er);
-      });
-  }, []);
 
   return (
     <div>

@@ -37,7 +37,6 @@ class QuestionToUserServices {
       answer,
       difficulty,
     });
-
     if (!postedQuestion) {
       throw new BadRequestError('Could not post the question');
     }
@@ -99,7 +98,7 @@ class QuestionToUserServices {
   }
 
   async userResponseEvaluation(params) {
-    const { questionId, answer, userId } = params;
+    const { questionId, answer } = params;
     const question = await this._questionToUserRepository.getQuestionById(
       questionId
     );
@@ -108,13 +107,14 @@ class QuestionToUserServices {
       throw new BadRequestError('Question not found!');
     }
     const difficultyLevel = question.difficulty;
+    console.log({ difficultyLevel });
+    console.log(answer, question.answer);
     const isAnswerCorrect = bcrypt.compareSync(answer, question?.answer);
-
+    console.log({ isAnswerCorrect });
     if (isAnswerCorrect) {
       const questionWithMoreDifficulty =
         await this._questionToUserRepository.getQuestionWithMoreDifficultyLevel(
-          difficultyLevel,
-          userId
+          difficultyLevel
         );
 
       return questionWithMoreDifficulty;
@@ -122,10 +122,9 @@ class QuestionToUserServices {
 
     const questionWithLessDifficulty =
       await this._questionToUserRepository.getQuestionWithLessDifficultyLevel(
-        difficultyLevel,
-        userId
+        difficultyLevel
       );
-
+    console.log({ questionWithLessDifficulty });
     return questionWithLessDifficulty;
   }
 
