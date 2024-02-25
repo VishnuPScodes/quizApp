@@ -1,4 +1,4 @@
-import { check } from 'express-validator';
+import { check, param } from 'express-validator';
 import validateRequest from './index.js';
 
 export const createQuestionValidator = [
@@ -42,5 +42,12 @@ export const createQuestionValidator = [
     .withMessage("difficulty can't be empty")
     .isNumeric()
     .withMessage('difficulty should be a number'),
+  ...validateRequest,
+];
+
+export const questionIdValidator = [
+  param('questionId')
+    .isMongoId()
+    .withMessage('Question id should be a mongoId'),
   ...validateRequest,
 ];
