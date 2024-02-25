@@ -22,7 +22,6 @@ export const getQuestionById = async (req, res) => {
 };
 
 export const createQuestion = async (req, res) => {
-  console.log('dfd');
   const {
     id,
     question,

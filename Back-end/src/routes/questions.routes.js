@@ -11,6 +11,7 @@ import {
 } from '../controllers/questionToUser.controller.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import { isAuthenticated } from '../middlewares/auth/authenticate.js';
+import { createQuestionValidator } from '../middlewares/validators/question.js';
 
 const questionRouter = express.Router();
 
@@ -19,7 +20,12 @@ questionRouter.get(
   isAuthenticated,
   asyncHandler(getAllQuestions)
 );
-questionRouter.post('/question', isAuthenticated, asyncHandler(createQuestion));
+questionRouter.post(
+  '/question',
+  isAuthenticated,
+  createQuestionValidator,
+  asyncHandler(createQuestion)
+);
 questionRouter.get(
   '/question/:questionId',
   isAuthenticated,
