@@ -48,7 +48,7 @@ export const Log = () => {
     });
     dispatch(authRequest());
     axios
-      .post('http://localhost:4001/auth/login', data)
+      .post('https://drab-jade-viper-suit.cyclic.app/auth/login', data)
       .then((res) => {
         console.log('into then');
         console.log('ress', res.data.token);

@@ -13,9 +13,11 @@ export const Mystats = () => {
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`http://localhost:4001/auth/profile/${userId}`).then((res) => {
-      setUserData(res.data);
-    });
+    axios
+      .get(`https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`)
+      .then((res) => {
+        setUserData(res.data);
+      });
   }, []);
   console.log('data', userData);
   return (

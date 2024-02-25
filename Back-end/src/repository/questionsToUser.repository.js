@@ -49,6 +49,7 @@ export class QuestionsToUserRepository {
 
     return question;
   }
+  
 
   async postQuestionForOneUserByAdmin(params) {
     const {

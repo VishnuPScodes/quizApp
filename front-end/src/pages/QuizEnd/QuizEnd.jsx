@@ -15,13 +15,15 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4001/auth/profile/${userId}`).then((res) => {
-      setUserData(res.data);
-    });
+    axios
+      .get(`https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`)
+      .then((res) => {
+        setUserData(res.data);
+      });
     console.log('score goott', score);
     console.log('user id', userId);
     // axios
-    //   .post(`http://localhost:4001/reg/played/${userId}?time=${timeTaken}`)
+    //   .post(`https://drab-jade-viper-suit.cyclic.app/reg/played/${userId}?time=${timeTaken}`)
     //   .then((res) => {})
     //   .catch((err) => {
     //     alert('There was an error saving your score:', err);
@@ -30,10 +32,13 @@ export const QuizEnd = ({ score, timeTaken }) => {
   }, []);
   const handleSave = () => {
     axios
-      .patch(`http://localhost:4001/halloffame/update/${userId}`, {
-        userScore: Number(score),
-        time: timeTaken,
-      })
+      .patch(
+        `https://drab-jade-viper-suit.cyclic.app/halloffame/update/${userId}`,
+        {
+          userScore: Number(score),
+          time: timeTaken,
+        }
+      )
       .then((res) => {
         alert('Your score has been saved!');
         navigate('/');

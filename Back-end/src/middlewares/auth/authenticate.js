@@ -12,7 +12,7 @@ const verifyToken = (token) => {
   });
 };
 
-export const authenticate = async (req, res, next) => {
+export const isAuthenticated = async (req, res, next) => {
   //check weather autherization header is set
   //if not throw an error
   if (!req.headers.authorization) {

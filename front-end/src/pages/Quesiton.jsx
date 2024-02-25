@@ -43,7 +43,9 @@ export const Question = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4001/quiz/question/65d6fb657ff653a7ee9cb3a9')
+      .get(
+        'https://drab-jade-viper-suit.cyclic.app/quiz/question/65d6fb657ff653a7ee9cb3a9'
+      )
       .then((e) => {
         let data = e.data;
         setSingle(data);
@@ -65,32 +67,34 @@ export const Question = () => {
       questionId: single._id,
     };
     setLoading(true);
-    axios.post(`http://localhost:4001/quiz/nextQuestion/`, data).then((e) => {
-      if (e.data == '') {
-        setind(-1);
-        setLoading(false);
-      } else {
-        setLoading(false);
-        let response = e.data;
-        let resDifficulty = response.difficulty;
-        setDfl(resDifficulty);
-        setCount((p) => p + 1);
-        let currDifficulty = single.difficulty;
-        if (currDifficulty < resDifficulty) {
-          setScore((p) => p + 5);
-          setCount(count + 1);
-
-          dispatch(addScore(score));
+    axios
+      .post(`https://drab-jade-viper-suit.cyclic.app/quiz/nextQuestion/`, data)
+      .then((e) => {
+        if (e.data == '') {
+          setind(-1);
+          setLoading(false);
         } else {
           setLoading(false);
-          setScore((p) => p - 2);
-          setCount(count + 1);
+          let response = e.data;
+          let resDifficulty = response.difficulty;
+          setDfl(resDifficulty);
+          setCount((p) => p + 1);
+          let currDifficulty = single.difficulty;
+          if (currDifficulty < resDifficulty) {
+            setScore((p) => p + 5);
+            setCount(count + 1);
 
-          dispatch(addScore(score));
+            dispatch(addScore(score));
+          } else {
+            setLoading(false);
+            setScore((p) => p - 2);
+            setCount(count + 1);
+
+            dispatch(addScore(score));
+          }
+          setSingle(e.data);
         }
-        setSingle(e.data);
-      }
-    });
+      });
   };
   return (
     <>

@@ -23,7 +23,7 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post('http://localhost:4001/auth/register', data)
+      .post('https://drab-jade-viper-suit.cyclic.app/auth/register', data)
       .then((res) => {
         setLoading(false);
         alert('Registered');

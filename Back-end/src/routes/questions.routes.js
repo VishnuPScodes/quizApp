@@ -10,20 +10,39 @@ import {
   userResponseEvaluation,
 } from '../controllers/questionToUser.controller.js';
 import asyncHandler from '../utils/asyncHandler.js';
+import { isAuthenticated } from '../middlewares/auth/authenticate.js';
 
 const questionRouter = express.Router();
 
-questionRouter.get('/questions', asyncHandler(getAllQuestions));
-questionRouter.post('/question', asyncHandler(createQuestion));
-questionRouter.get('/question/:questionId', asyncHandler(getQuestionById));
-questionRouter.get('/userQuestions/:userId', asyncHandler(getUserQuestions));
-questionRouter.post('/nextQuestion', asyncHandler(userResponseEvaluation));
+questionRouter.get(
+  '/questions',
+  isAuthenticated,
+  asyncHandler(getAllQuestions)
+);
+questionRouter.post('/question', isAuthenticated, asyncHandler(createQuestion));
+questionRouter.get(
+  '/question/:questionId',
+  isAuthenticated,
+  asyncHandler(getQuestionById)
+);
+questionRouter.get(
+  '/userQuestions/:userId',
+  isAuthenticated,
+  asyncHandler(getUserQuestions)
+);
+questionRouter.post(
+  '/nextQuestion',
+  isAuthenticated,
+  asyncHandler(userResponseEvaluation)
+);
 questionRouter.post(
   '/postQuestion/:userId',
+  isAuthenticated,
   asyncHandler(postQuestionForOneUserByAdmin)
 );
 questionRouter.delete(
   '/removeAllQuestions/:userId',
+  isAuthenticated,
   asyncHandler(removeAllQuestionsPerUser)
 );
 

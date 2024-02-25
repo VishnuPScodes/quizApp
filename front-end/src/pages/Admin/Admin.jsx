@@ -15,14 +15,14 @@ export const Admin = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4001/admin')
+      .get('https://drab-jade-viper-suit.cyclic.app/admin')
       .then((e) => {
         setData(e.data);
       })
       .then(() => {
         setLoader(false);
       });
-    axios.get('http://localhost:4001/questbank').then((e) => {
+    axios.get('https://drab-jade-viper-suit.cyclic.app/questbank').then((e) => {
       setCount(e.data);
     });
   }, []);
@@ -106,12 +106,17 @@ export const Admin = () => {
                 <input
                   className="check-box"
                   onChange={() => {
-                    axios.get('http://localhost:4001/questbank').then((e) => {
-                      setCount(e.data);
-                    });
+                    axios
+                      .get('https://drab-jade-viper-suit.cyclic.app/questbank')
+                      .then((e) => {
+                        setCount(e.data);
+                      });
                     if (count.length < 10) {
                       axios
-                        .post('http://localhost:4001/questbank', e)
+                        .post(
+                          'https://drab-jade-viper-suit.cyclic.app/questbank',
+                          e
+                        )
                         .then((e) => {})
                         .catch((er) => {
                           console.log(er);
@@ -139,7 +144,10 @@ export const Admin = () => {
                     gk.push(h);
                   }
                 });
-                axios.post('http://localhost:4001/questbank', gk);
+                axios.post(
+                  'https://drab-jade-viper-suit.cyclic.app/questbank',
+                  gk
+                );
                 navigate('/');
               }}
             >

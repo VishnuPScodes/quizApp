@@ -1,6 +1,9 @@
 import { HallOfFameServices_ } from '../services/hallOfFame.service.js';
 
 export const getUsersSortedByScore = async (req, res) => {
+  console.log('====================================');
+  console.log('shit');
+  console.log('====================================');
   const users = await HallOfFameServices_.getUsersSortedByScore();
 
   res.send(users);
