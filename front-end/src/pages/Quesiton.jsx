@@ -11,6 +11,7 @@ import { MdTimer } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
 export const Question = () => {
+  const token = useSelector((state) => state.token);
   const userScore = useSelector((state) => state.userScore);
   const [loading, setLoading] = useState(false);
   const [single, setSingle] = useState(1);
@@ -44,7 +45,8 @@ export const Question = () => {
   useEffect(() => {
     axios
       .get(
-        'https://drab-jade-viper-suit.cyclic.app/quiz/question/65d6fb657ff653a7ee9cb3a9'
+        'https://drab-jade-viper-suit.cyclic.app/quiz/question/65d6fb657ff653a7ee9cb3a9',
+        { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
       )
       .then((e) => {
         let data = e.data;
@@ -61,14 +63,17 @@ export const Question = () => {
   //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
-    console.log('gott the id', single._id, 'AN', ans);
     const data = {
       answer: ans,
       questionId: single._id,
     };
     setLoading(true);
     axios
-      .post(`https://drab-jade-viper-suit.cyclic.app/quiz/nextQuestion/`, data)
+      .post(
+        'https://drab-jade-viper-suit.cyclic.app/quiz/nextQuestion/',
+        data,
+        { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
+      )
       .then((e) => {
         if (e.data == '') {
           setind(-1);
@@ -83,19 +88,18 @@ export const Question = () => {
           if (currDifficulty < resDifficulty) {
             setScore((p) => p + 5);
             setCount(count + 1);
-
             dispatch(addScore(score));
           } else {
             setLoading(false);
             setScore((p) => p - 2);
             setCount(count + 1);
-
             dispatch(addScore(score));
           }
           setSingle(e.data);
         }
       });
   };
+
   return (
     <>
       {loader ? (
@@ -211,7 +215,7 @@ export const Question = () => {
                             </div>
                             <div className="stats-cont">
                               <div>
-                                <div className="user-name">Vishnu PS</div>
+                                {/* <div className="user-name">Vishnu PS</div> */}
                                 <div className="over-score">
                                   Your over all score:{userScore}
                                 </div>

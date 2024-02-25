@@ -12,11 +12,24 @@ export const Mystats = () => {
   const [userData, setUserData] = useState([]);
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   useEffect(() => {
     axios
-      .get(`https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`)
+      .get(
+        `https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`,
+        config
+      )
       .then((res) => {
         setUserData(res.data);
+      })
+      .catch((error) => {
+        // Handle error
       });
   }, []);
   console.log('data', userData);
