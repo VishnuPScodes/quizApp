@@ -13,23 +13,15 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.userId);
   const [userData, setUserData] = useState([]);
-
+  const token = useSelector((state) => state.token);
   useEffect(() => {
     axios
       .get(`https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`)
       .then((res) => {
         setUserData(res.data);
       });
-    console.log('score goott', score);
-    console.log('user id', userId);
-    // axios
-    //   .post(`https://drab-jade-viper-suit.cyclic.app/reg/played/${userId}?time=${timeTaken}`)
-    //   .then((res) => {})
-    //   .catch((err) => {
-    //     alert('There was an error saving your score:', err);
-    //     console.log(err);
-    //   });
   }, []);
+
   const handleSave = () => {
     axios
       .patch(
@@ -37,6 +29,11 @@ export const QuizEnd = ({ score, timeTaken }) => {
         {
           userScore: Number(score),
           time: timeTaken,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       )
       .then((res) => {
@@ -48,7 +45,6 @@ export const QuizEnd = ({ score, timeTaken }) => {
         console.log(err);
       });
   };
-
   return (
     <div>
       <ParticlesBg type="custom" bg={true} />
