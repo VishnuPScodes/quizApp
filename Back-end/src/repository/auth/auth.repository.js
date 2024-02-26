@@ -21,7 +21,6 @@ export class UserAuthRepository {
 
   async isUserAlreadyExists(email) {
     const user = await this._model.findOne({ email });
-    console.log('user', user);
     if (!user) {
       return false;
     }

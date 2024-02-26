@@ -31,13 +31,11 @@ export class HallOfFameRepository {
   }
 
   async updateUserScore(userId, score, time, totalgamesplayed) {
-    console.log('user id in....', userId);
     const updatedUser = await this._model.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId(userId) },
       { $set: { score, bestTime: time, totalgamesplayed } },
       { new: true }
     );
-    console.log('updated used ', updatedUser._id);
     return updatedUser;
   }
 }

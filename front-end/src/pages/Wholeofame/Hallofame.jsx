@@ -5,7 +5,6 @@ import { Audio } from 'react-loader-spinner';
 import ParticlesBg from 'particles-bg';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 export const Hallofame = () => {
   const [loader, setLoader] = useState(false);
   const token = useSelector((state) => state.token);

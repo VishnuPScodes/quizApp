@@ -41,7 +41,6 @@ class UserAuthServices {
   }
 
   async userLogin(params) {
-    console.log('login in');
     const { password, email } = params;
     const alreadyUser = await this._userAuthRepository.isUserAlreadyExists(
       email

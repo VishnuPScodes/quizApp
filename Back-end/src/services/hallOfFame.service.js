@@ -24,7 +24,6 @@ class HallOfFameServices {
     const userPreviousScore = user.score;
     const previousBestTime = user.bestTime;
     let totalGamesPlayed = user.totalgamesplayed + 1;
-    console.log('total gems plaayed', totalGamesPlayed, user.totalgamesplayed);
     if (previousBestTime < time) {
       time = previousBestTime;
     }

@@ -42,7 +42,6 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.checkPassword = function (password) {
-  console.log('herererere inside ');
   return bcrypt.compareSync(password, this.password);
 };
 

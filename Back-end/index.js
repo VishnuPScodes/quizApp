@@ -1,5 +1,4 @@
 import express from 'express';
-import connect from './configs/db.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 // import regController from './controller/reg.controller.js';
@@ -35,7 +34,6 @@ app.use('/halloffame', hallOfFameRouter);
 const PORT = process.env.PORT;
 app.listen(PORT, async (req, res) => {
   try {
-    console.log('here');
     await mongoose.connect(process.env.URL);
     console.log('listening to the port ' + PORT);
   } catch (error) {

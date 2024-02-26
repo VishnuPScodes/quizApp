@@ -49,7 +49,6 @@ export class QuestionsToUserRepository {
 
     return question;
   }
-  
 
   async postQuestionForOneUserByAdmin(params) {
     const {
@@ -91,7 +90,6 @@ export class QuestionsToUserRepository {
     const question = await this._model.findOne({
       difficulty: { $lt: Number(difficultyLevel) },
     });
-    console.log({ question });
     return question;
   }
 

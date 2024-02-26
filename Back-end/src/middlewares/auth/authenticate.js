@@ -38,13 +38,11 @@ export const isAuthenticated = async (req, res, next) => {
   let user;
   try {
     user = await verifyToken(token);
-    console.log('user', user);
     req.user = user.user;
   } catch (error) {
     res.status(400).send({ message: 'Authorization token was not provided' });
   }
 
-  console.log(req.user);
   //if the token is valid then we will user retrived from the token in the request object
 
   next();
