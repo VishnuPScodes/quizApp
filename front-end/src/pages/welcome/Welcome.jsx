@@ -1,16 +1,15 @@
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import styles from "./welcome.module.css";
-import ParticlesBg from "particles-bg";
-import { useNavigate } from "react-router-dom";
-import { Tooltip } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/action";
-import { BsFillPlayFill } from "react-icons/bs";
-import { FaClipboardList } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
-import {VscGraphLine} from 'react-icons/vsc'
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import styles from './welcome.module.css';
+import ParticlesBg from 'particles-bg';
+import { useNavigate } from 'react-router-dom';
+import { Tooltip } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/action';
+import { BsFillPlayFill } from 'react-icons/bs';
+import { FaClipboardList } from 'react-icons/fa';
+import { BiLogOut } from 'react-icons/bi';
+import { VscGraphLine } from 'react-icons/vsc';
 export const Welcome = () => {
- 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -23,20 +22,20 @@ export const Welcome = () => {
           className={styles.btn1}
         >
           <BiLogOut
-            fontSize={"24px"}
-            style={{ paddingRight: "5px", color: "rgb(239, 199, 40)" }}
-          />{" "}
+            fontSize={'24px'}
+            style={{ paddingRight: '5px', color: 'rgb(239, 199, 40)' }}
+          />{' '}
           Log out
         </div>
       </Tooltip>
       <AiOutlineArrowLeft
         onClick={() => {
-          navigate("/");
+          navigate('/');
         }}
-        fontSize={"32px"}
+        fontSize={'32px'}
         style={{
-          paddingLeft: "20px",
-          paddingTop: "20px",
+          paddingLeft: '20px',
+          paddingTop: '20px',
         }}
       />
       <ParticlesBg type="fountain" bg={true} />
@@ -44,38 +43,38 @@ export const Welcome = () => {
       <div className={styles.welcome_cont}>
         <div
           onClick={() => {
-            navigate("/quiz");
+            navigate('/quiz');
           }}
           className={styles.btn}
         >
           <BsFillPlayFill
-            fontSize={"34px"}
-            style={{ paddingRight: "5px", color: "rgb(239, 199, 40)" }}
-          />{" "}
+            fontSize={'34px'}
+            style={{ paddingRight: '5px', color: 'rgb(239, 199, 40)' }}
+          />{' '}
           Start your quiz now!
         </div>
         <div
           onClick={() => {
-            navigate("/hallofame");
+            navigate('/hallofame');
           }}
           className={styles.btn}
         >
           <FaClipboardList
-            fontSize={"20px"}
-            style={{ paddingRight: "5px", color: "rgb(239, 199, 40)" }}
+            fontSize={'20px'}
+            style={{ paddingRight: '5px', color: 'rgb(239, 199, 40)' }}
           />
-          See our whole of fame!
+          See our hall of fame!
         </div>
         <div
           onClick={() => {
-            navigate("/mystats");
+            navigate('/mystats');
           }}
           className={styles.btn}
         >
           <VscGraphLine
-            fontSize={"20px"}
-            style={{ paddingRight: "5px", color: "rgb(239, 199, 40)" }}
-          />{" "}
+            fontSize={'20px'}
+            style={{ paddingRight: '5px', color: 'rgb(239, 199, 40)' }}
+          />{' '}
           My stats!
         </div>
       </div>
