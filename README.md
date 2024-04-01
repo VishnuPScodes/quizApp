@@ -35,4 +35,4 @@ Start the server
 
 here is the deployed link
 ```
-https://quiz-app-vishnupscodes.netlify.app/
+https://quiz-b549itocf-vishnupscodes.vercel.app/
