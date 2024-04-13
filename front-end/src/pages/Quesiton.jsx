@@ -216,9 +216,6 @@ export const Question = () => {
                             <div className="stats-cont">
                               <div>
                                 {/* <div className="user-name">Vishnu PS</div> */}
-                                <div className="over-score">
-                                  Your over all score:{userScore}
-                                </div>
                               </div>
                               <div>
                                 <div>Session score:{score}</div>
