@@ -1,6 +1,15 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
+const refreshTokenSchema = new mongoose.Schema({
+  token: {
+    type: String,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
+});
 const userSchema = new mongoose.Schema({
   password: {
     type: String,
@@ -18,6 +27,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  refreshTokens: {
+    type: [refreshTokenSchema],
+    default: [],
+  },
   email: {
     type: String,
     required: true,
@@ -30,8 +43,8 @@ const userSchema = new mongoose.Schema({
 });
 
 //hashing to protect the passwords
-userSchema.pre('save', function (next) {
-  if (!this.isModified('password')) {
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password")) {
     return next();
   } else {
     var hash = bcrypt.hashSync(this.password, 8);
@@ -45,6 +58,6 @@ userSchema.methods.checkPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-const userModel = mongoose.model('user', userSchema);
+const userModel = mongoose.model("user", userSchema);
 
 export default userModel;
