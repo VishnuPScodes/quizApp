@@ -1,8 +1,8 @@
-import express from 'express';
+import express from "express";
 //import Reg from '../models/reg.model.js';
-import { body, validationResult } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { UserAuthServices_ } from '../../services/auth/userAuth.service.js';
+import { body, validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+import { UserAuthServices_ } from "../../services/auth/userAuth.service.js";
 const newToken = (regData) => {
   return jwt.sign({ regData }, process.env.JWT_SECRET_KEY);
 };
@@ -19,10 +19,15 @@ export const getUserInfo = async (req, res) => {
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
   const user = await UserAuthServices_.registerUser({ name, email, password });
+  const { accessToken } = user;
+  res.cookie("access_token", accessToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
 
   res.status(200).send({
-    message: 'User registered',
-    data: user,
+    message: "User registered",
+    data: user?.user,
   });
 };
 

@@ -1,4 +1,4 @@
-import User from '../../models/user.model.js';
+import User from "../../models/user.model.js";
 
 export class UserAuthRepository {
   constructor() {
@@ -26,5 +26,10 @@ export class UserAuthRepository {
     }
 
     return user;
+  }
+  async storeRefreshToken(userId, refreshToken) {
+    const user = await this._model.findOne({ _id: userId });
+    user.refreshTokens.push({ token: refreshToken });
+    await user.save();
   }
 }
