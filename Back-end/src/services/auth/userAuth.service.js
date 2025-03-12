@@ -65,9 +65,19 @@ class UserAuthServices {
     if (!match) {
       throw new BadRequestError("Password does not match");
     }
-    const token = newToken();
+    const tokenData = {
+      name: alreadyUser.name,
+      email: alreadyUser.email,
+    };
+    const accessToken = newToken(tokenData, "1h");
+    const refreshToken = newToken(tokenData, "30d");
 
-    return { token, user: alreadyUser };
+    await this._userAuthRepository.storeRefreshToken(
+      alreadyUser._id,
+      refreshToken
+    );
+
+    return { accessToken, user: alreadyUser };
   }
 }
 

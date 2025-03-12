@@ -34,8 +34,13 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const loginResponse = await UserAuthServices_.userLogin({ password, email });
+  const { accessToken, user } = loginResponse;
+  res.cookie("access_token", accessToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
 
-  res.send(loginResponse);
+  res.send(user);
 };
 
 export default router;
