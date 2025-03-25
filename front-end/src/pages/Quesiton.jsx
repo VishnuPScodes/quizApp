@@ -1,15 +1,15 @@
-import './question.css';
-import { AiFillStar } from 'react-icons/ai';
-import { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import { QuizEnd } from './QuizEnd/QuizEnd';
-import { Audio } from 'react-loader-spinner';
-import { useDispatch, useSelector } from 'react-redux';
-import { addScore } from '../redux/action';
-import { Progress } from '@chakra-ui/react';
-import { MdTimer } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import { Spinner } from '@chakra-ui/react';
+import "./question.css";
+import { AiFillStar } from "react-icons/ai";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import { QuizEnd } from "./QuizEnd/QuizEnd";
+import { Audio } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { addScore } from "../redux/action";
+import { Progress } from "@chakra-ui/react";
+import { MdTimer } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { Spinner } from "@chakra-ui/react";
 export const Question = () => {
   const token = useSelector((state) => state.token);
   const userScore = useSelector((state) => state.userScore);
@@ -45,7 +45,9 @@ export const Question = () => {
   useEffect(() => {
     axios
       .get(
-        'https://drab-jade-viper-suit.cyclic.app/quiz/question/65d6fb657ff653a7ee9cb3a9',
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/quiz/question/65d6fb657ff653a7ee9cb3a9`,
         { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
       )
       .then((e) => {
@@ -70,12 +72,12 @@ export const Question = () => {
     setLoading(true);
     axios
       .post(
-        'https://drab-jade-viper-suit.cyclic.app/quiz/nextQuestion/',
+        `${import.meta.env.VITE_BASE_URL}/quiz/nextQuestion/`,
         data,
         { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
       )
       .then((e) => {
-        if (e.data == '') {
+        if (e.data == "") {
           setind(-1);
           setLoading(false);
         } else {
@@ -117,7 +119,7 @@ export const Question = () => {
       ) : (
         <div>
           <div className="cont-que">
-            {' '}
+            {" "}
             {count == 10 ? (
               <QuizEnd timeTaken={timer} score={score} />
             ) : (
@@ -137,12 +139,12 @@ export const Question = () => {
                                 emptyColor="gray"
                                 size="xl"
                                 style={{
-                                  height: '50px',
-                                  width: '50px',
-                                  position: 'absolute',
-                                  top: '30%',
-                                  left: '40%',
-                                  zIndex: '3',
+                                  height: "50px",
+                                  width: "50px",
+                                  position: "absolute",
+                                  top: "30%",
+                                  left: "40%",
+                                  zIndex: "3",
                                 }}
                               />
                             </div>
@@ -156,11 +158,11 @@ export const Question = () => {
                                 </div>
                                 <div className="star-box">
                                   {Array(10)
-                                    .fill('')
+                                    .fill("")
                                     .map((_, i) => (
                                       <AiFillStar
                                         key={i}
-                                        color={i < dfl ? 'red' : 'gray'}
+                                        color={i < dfl ? "red" : "gray"}
                                       />
                                     ))}
                                 </div>
@@ -232,7 +234,7 @@ export const Question = () => {
                         </div>
                         <div
                           onClick={() => {
-                            navigate('/admin');
+                            navigate("/admin");
                           }}
                           className="save-btn"
                         >

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import './admin.css';
-import { Audio } from 'react-loader-spinner';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import "./admin.css";
+import { Audio } from "react-loader-spinner";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 export const Admin = () => {
   //useNavigate hook to navigate to different routes
   const navigate = useNavigate();
@@ -15,14 +15,14 @@ export const Admin = () => {
 
   useEffect(() => {
     axios
-      .get('https://drab-jade-viper-suit.cyclic.app/admin')
+      .get(`${import.meta.env.VITE_BASE_URL}/admin`)
       .then((e) => {
         setData(e.data);
       })
       .then(() => {
         setLoader(false);
       });
-    axios.get('https://drab-jade-viper-suit.cyclic.app/questbank').then((e) => {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/questbank`).then((e) => {
       setCount(e.data);
     });
   }, []);
@@ -46,19 +46,19 @@ export const Admin = () => {
         <div className="main-admin">
           <AiOutlineArrowLeft
             onClick={() => {
-              navigate('/');
+              navigate("/");
             }}
-            fontSize={'32px'}
+            fontSize={"32px"}
             style={{
-              paddingLeft: '20px',
-              paddingTop: '20px',
+              paddingLeft: "20px",
+              paddingTop: "20px",
             }}
           />
-          <div style={{ marginLeft: '5%' }}>
+          <div style={{ marginLeft: "5%" }}>
             <div className="header">
-              {' '}
+              {" "}
               <div className="welocme-to-admin-page">Welcome to admin page</div>
-              <div className="select-10-ques">Select 10 questions</div>{' '}
+              <div className="select-10-ques">Select 10 questions</div>{" "}
             </div>
           </div>
 
@@ -87,36 +87,33 @@ export const Admin = () => {
                 }}
                 className="single-q"
                 style={{
-                  minheight: '60px',
-                  width: '90%',
-                  margin: 'auto',
-                  backgroundColor: !e.disabled ? 'antiquewhite' : 'cornsilk',
-                  marginTop: '15px',
-                  fontSize: '16px',
-                  borderRadius: '10px',
-                  textAlign: 'center',
-                  fontFamily: 'Poppins',
-                  fontSize: '18px',
-                  lineHeight: '24px',
+                  minheight: "60px",
+                  width: "90%",
+                  margin: "auto",
+                  backgroundColor: !e.disabled ? "antiquewhite" : "cornsilk",
+                  marginTop: "15px",
+                  fontSize: "16px",
+                  borderRadius: "10px",
+                  textAlign: "center",
+                  fontFamily: "Poppins",
+                  fontSize: "18px",
+                  lineHeight: "24px",
                   boxShadow: e.disabled
-                    ? ' box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px'
-                    : '',
+                    ? " box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
+                    : "",
                 }}
               >
                 <input
                   className="check-box"
                   onChange={() => {
                     axios
-                      .get('https://drab-jade-viper-suit.cyclic.app/questbank')
+                      .get(`${import.meta.env.VITE_BASE_URL}/questbank`)
                       .then((e) => {
                         setCount(e.data);
                       });
                     if (count.length < 10) {
                       axios
-                        .post(
-                          'https://drab-jade-viper-suit.cyclic.app/questbank',
-                          e
-                        )
+                        .post(`${import.meta.env.VITE_BASE_URL}/questbank`, e)
                         .then((e) => {})
                         .catch((er) => {
                           console.log(er);
@@ -144,11 +141,8 @@ export const Admin = () => {
                     gk.push(h);
                   }
                 });
-                axios.post(
-                  'https://drab-jade-viper-suit.cyclic.app/questbank',
-                  gk
-                );
-                navigate('/');
+                axios.post(`${import.meta.env.VITE_BASE_URL}/questbank`, gk);
+                navigate("/");
               }}
             >
               Add Questions

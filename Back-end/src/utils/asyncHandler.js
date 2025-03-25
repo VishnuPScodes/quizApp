@@ -8,7 +8,7 @@ import {
   TooManyRequestsError,
   UnauthorizedError,
   UnprocessableError,
-} from './response/error.js';
+} from "./response/error.js";
 
 const asyncHandler = (fnc) => (req, res, next) => {
   return Promise.resolve(fnc(req, res, next)).catch((err) => {
@@ -33,11 +33,13 @@ const asyncHandler = (fnc) => (req, res, next) => {
     } else if (err instanceof PaymentRequiredError) {
       status = 402;
     } else {
-      error = 'Internal Server Error Occurred';
+      error = "Internal Server Error Occurred";
     }
-    return res.status(status).json({
-      error: error,
-    });
+    if (!res.headersSent) {
+      return res.status(status).json({
+        error: error,
+      });
+    }
   });
 };
 

@@ -62,6 +62,7 @@ class UserAuthServices {
       throw new BadRequestError("User does not exists with this email id");
     }
     const match = alreadyUser.checkPassword(password);
+
     if (!match) {
       throw new BadRequestError("Password does not match");
     }
@@ -69,13 +70,17 @@ class UserAuthServices {
       name: alreadyUser.name,
       email: alreadyUser.email,
     };
+
     const accessToken = newToken(tokenData, "1h");
     const refreshToken = newToken(tokenData, "30d");
 
-    await this._userAuthRepository.storeRefreshToken(
+    const storedRefreshToken = await this._userAuthRepository.storeRefreshToken(
       alreadyUser._id,
       refreshToken
     );
+    if (!storedRefreshToken) {
+      throw new BadRequestError("Not able to store the refresh token");
+    }
 
     return { accessToken, user: alreadyUser };
   }

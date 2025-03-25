@@ -28,8 +28,26 @@ export class UserAuthRepository {
     return user;
   }
   async storeRefreshToken(userId, refreshToken) {
-    const user = await this._model.findOne({ _id: userId });
-    user.refreshTokens.push({ token: refreshToken });
-    await user.save();
+    const storeRefreshToken = await this._model.findOneAndUpdate(
+      {
+        id: userId,
+      },
+      {
+        $push: {
+          refreshTokens: {
+            token: refreshToken,
+          },
+        },
+      }
+    );
+    if (!storeRefreshToken) {
+      return false;
+    }
+    // const user = await this._model.findOne({ _id: userId });
+    // user.refreshTokens.push({ token: refreshToken });
+    // const storedRefreshToken = await user.save();
+    // console.log({ storedRefreshToken });
+
+    return true;
   }
 }

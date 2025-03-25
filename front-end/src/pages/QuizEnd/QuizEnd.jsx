@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Graph } from '../../components/Grapgh/Graph';
-import { emptyScoreArray } from '../../redux/action';
-import { AiFillHome } from 'react-icons/ai';
-import AOS from 'aos';
-import './end.css';
-import ParticlesBg from 'particles-bg';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Graph } from "../../components/Grapgh/Graph";
+import { emptyScoreArray } from "../../redux/action";
+import { AiFillHome } from "react-icons/ai";
+import AOS from "aos";
+import "./end.css";
+import ParticlesBg from "particles-bg";
+import { useNavigate } from "react-router-dom";
 export const QuizEnd = ({ score, timeTaken }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const token = useSelector((state) => state.token);
   useEffect(() => {
     axios
-      .get(`https://drab-jade-viper-suit.cyclic.app/auth/profile/${userId}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/auth/profile/${userId}`)
       .then((res) => {
         setUserData(res.data);
       });
@@ -25,7 +25,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
   const handleSave = () => {
     axios
       .patch(
-        `https://drab-jade-viper-suit.cyclic.app/halloffame/update/${userId}`,
+        `${import.meta.env.VITE_BASE_URL}/halloffame/update/${userId}`,
         {
           userScore: Number(score),
           time: timeTaken,
@@ -37,11 +37,11 @@ export const QuizEnd = ({ score, timeTaken }) => {
         }
       )
       .then((res) => {
-        alert('Your score has been saved!');
-        navigate('/');
+        alert("Your score has been saved!");
+        navigate("/");
       })
       .catch((err) => {
-        alert('There was an error saving your score:', err);
+        alert("There was an error saving your score:", err);
         console.log(err);
       });
   };
@@ -51,7 +51,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
       <div className="q-cont">
         <div className="quiz-end">Congratulations! </div>
         <div className="quiz-end">
-          {userData?.name} You have completed the quiz{' '}
+          {userData?.name} You have completed the quiz{" "}
         </div>
 
         <div className="quiz-end">your score is :{score} </div>
@@ -59,7 +59,7 @@ export const QuizEnd = ({ score, timeTaken }) => {
       <div className="q-cont">
         <div className="quiz-end-2">your score is {score}! </div>
         <div className="quiz-end-2">
-          Save your scrore now ! and see it on our hall of fame dashboard{' '}
+          Save your scrore now ! and see it on our hall of fame dashboard{" "}
         </div>
         <div className="save-btn" onClick={handleSave}>
           Save my score
@@ -67,10 +67,10 @@ export const QuizEnd = ({ score, timeTaken }) => {
         <div
           className="save-btn"
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
         >
-          <AiFillHome fontSize={'24px'} /> Home
+          <AiFillHome fontSize={"24px"} /> Home
         </div>
       </div>
       <div className="line">Line graph</div>
