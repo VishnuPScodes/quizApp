@@ -84,6 +84,25 @@ class UserAuthServices {
 
     return { accessToken, user: alreadyUser };
   }
+
+  async sendMailForForgotPassword(email) {
+    const user = await this._userAuthRepository.isUserAlreadyExists(email);
+    if (!user) {
+      throw new BadRequestError("User does not exists with this email id");
+    }
+    const tokenData = {
+      email: user.email,
+    };
+    const accessToken = newToken(tokenData, "1h");
+    const response = await this._userAuthRepository.sendMailForForgotPassword(
+      "psvishnu131@gmail.com",
+      "Welcome to Our Platform",
+      "Thank you for joining!",
+      "<h1>Welcome Aboard!</h1><p>We're excited to have you with us.</p>"
+    );
+
+    return response;
+  }
 }
 
 export const UserAuthServices_ = new UserAuthServices();

@@ -1,4 +1,6 @@
+import { createTransporter } from "../../../configs/node-mailer.js";
 import User from "../../models/user.model.js";
+import nodemailer from "nodemailer";
 
 export class UserAuthRepository {
   constructor() {
@@ -49,5 +51,26 @@ export class UserAuthRepository {
     // console.log({ storedRefreshToken });
 
     return true;
+  }
+
+  async sendMailForForgotPassword(to, subject, text, html) {
+    try {
+      const transporter = createTransporter();
+
+      // Define email options
+      const mailOptions = {
+        from: process.env.EMAIL_USER, // Sender address
+        to: to, // Recipient address
+        subject: subject, // Subject line
+        text: text, // Plain text body
+        html: html, // HTML body (optional)
+      };
+      const info = await transporter.sendMail(mailOptions);
+      console.log("Email sent successfully:", info.messageId);
+      return info;
+    } catch (error) {
+      console.log("Error while sending email:", error);
+      return error;
+    }
   }
 }
