@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { authRequest } from '../../redux/action';
-import { ThreeDots } from 'react-loader-spinner';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import './auth.css';
-import { useToast } from '@chakra-ui/react';
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authRequest } from "../../redux/action";
+import { ThreeDots } from "react-loader-spinner";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import "./auth.css";
+import { useToast } from "@chakra-ui/react";
 
 export const Reg = () => {
   const toast = useToast();
@@ -23,19 +23,20 @@ export const Reg = () => {
   const handleRegister = () => {
     setLoading(true);
     axios
-      .post('https://drab-jade-viper-suit.cyclic.app/auth/register', data)
+      .post(`${import.meta.env.VITE_BASE_URL}/auth/register`, data)
       .then((res) => {
         setLoading(false);
-        alert('Registered');
-        navigate('/log');
+        alert("Registered");
+        navigate("/log");
       })
       .catch((er) => {
+        console.log("check the damn", er.response.data.error);
         setLoading(false);
         alert(er.response.data.error);
         toast({
-          title: 'Alert!',
-          description: 'Your message here.',
-          status: 'success',
+          title: "Alert!",
+          description: "Your message here.",
+          status: "success",
           duration: 3000, // 3 seconds
           isClosable: true,
         });
@@ -46,12 +47,12 @@ export const Reg = () => {
       <div className="log-main">
         <AiOutlineArrowLeft
           onClick={() => {
-            navigate('/log');
+            navigate("/log");
           }}
-          fontSize={'32px'}
+          fontSize={"32px"}
           style={{
-            paddingLeft: '20px',
-            paddingTop: '20px',
+            paddingLeft: "20px",
+            paddingTop: "20px",
           }}
         />
         <div className="welcome">Let's Register</div>
@@ -88,8 +89,8 @@ export const Reg = () => {
             <div className="loader">
               <ThreeDots
                 style={{
-                  textAlignL: 'center',
-                  alignSelf: 'center',
+                  textAlignL: "center",
+                  alignSelf: "center",
                 }}
                 height="25"
                 width="25"
@@ -102,7 +103,7 @@ export const Reg = () => {
               />
             </div>
           ) : (
-            'Register'
+            "Register"
           )}
         </button>
       </div>

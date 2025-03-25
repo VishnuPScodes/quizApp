@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addId,
   addScore,
@@ -10,12 +10,12 @@ import {
   authFailure,
   authRequest,
   authSuccess,
-} from '../../redux/action';
-import { ThreeDots } from 'react-loader-spinner';
-import './auth.css';
-import { useToast } from '@chakra-ui/react';
+} from "../../redux/action";
+import { ThreeDots } from "react-loader-spinner";
+import "./auth.css";
+import { useToast } from "@chakra-ui/react";
 
-import ParticlesBg from 'particles-bg';
+import ParticlesBg from "particles-bg";
 
 export const Log = () => {
   const toast = useToast();
@@ -33,37 +33,37 @@ export const Log = () => {
   //function to take the user to the registration page
 
   const handleReg = () => {
-    navigate('/reg');
+    navigate("/reg");
   };
 
   //using the data from the form to make a post request to the backend to confirm the authentication
 
   const handleLogin = () => {
     toast({
-      title: 'Alert!',
-      description: 'Your message here.',
-      status: 'success',
+      title: "Alert!",
+      description: "Your message here.",
+      status: "success",
       duration: 3000, // 3 seconds
       isClosable: true,
     });
     dispatch(authRequest());
     axios
-      .post('https://drab-jade-viper-suit.cyclic.app/auth/login', data)
+      .post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data)
       .then((res) => {
-        console.log('into then');
-        console.log('ress', res.data.token);
+        console.log("into then");
+        console.log("ress", res.data);
         dispatch(authSuccess());
         dispatch(addToken(res.data.token));
-        dispatch(addId(res.data.user._id));
+        dispatch(addId(res.data._id));
 
-        dispatch(addUserScore(res.data.user.score));
-        alert('login successful');
-        navigate('/');
+        dispatch(addUserScore(res.data.score));
+        alert("login successful");
+        navigate("/");
       })
       .catch((er) => {
         dispatch(authFailure());
-        alert(er.response.data.error);
-        console.log('eer', er.response.data.error);
+        alert(er.response?.data?.error);
+        console.log("eer", er);
       });
   };
 
@@ -125,7 +125,7 @@ export const Log = () => {
 
         <button
           onClick={() => {
-            navigate('/Admin');
+            navigate("/Admin");
           }}
           className="log-btn1"
         >

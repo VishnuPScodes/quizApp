@@ -33,7 +33,10 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log({ email, password });
+
   const loginResponse = await UserAuthServices_.userLogin({ password, email });
+
   const { accessToken, user } = loginResponse;
   res.cookie("access_token", accessToken, {
     httpOnly: true,
