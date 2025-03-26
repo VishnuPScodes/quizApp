@@ -110,4 +110,13 @@ export class UserAuthRepository {
     const storedResetToken = await user.save();
     return storedResetToken;
   }
+  async storeNewPassword(email, password) {
+    const user = await this._model.findOne({ email });
+    if (!user) {
+      return false;
+    }
+    user.password = password;
+    const storedNewPassword = await user.save();
+    return storedNewPassword;
+  }
 }

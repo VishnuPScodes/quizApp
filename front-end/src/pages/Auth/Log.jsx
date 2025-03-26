@@ -98,6 +98,22 @@ export const Log = () => {
           />
         </div>
 
+        <div 
+          onClick={() => navigate("/forgot-password")} 
+          style={{
+            textAlign: "right",
+            width: "81%",
+            margin: "auto",
+            marginTop: "10px",
+            cursor: "pointer",
+            color: "#bb8135",
+            fontFamily: "Poppins",
+            fontSize: "14px"
+          }}
+        >
+          Forgot Password?
+        </div>
+
         <button className="log-btn1" onClick={handleLogin}>
           {loading ? (
             <div className="loader">

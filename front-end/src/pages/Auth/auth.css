@@ -96,3 +96,28 @@ input:focus {
 .admin-btn {
   display: flex;
 }
+
+.error-text {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  padding-left: 10px;
+  font-family: "Poppins";
+}
+
+.error-list {
+  margin-top: 5px;
+  text-align: left;
+}
+
+.disabled-btn {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+}
+
+.disabled-btn:hover {
+  background-color: cornsilk !important;
+  border-radius: 10px !important;
+  border: 1px solid black !important;
+}

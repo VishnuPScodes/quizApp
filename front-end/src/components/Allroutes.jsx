@@ -8,8 +8,8 @@ import { Admin } from '../pages/Admin/Admin'
 import { Welcome } from '../pages/welcome/Welcome'
 import { Mystats } from '../pages/Mystats/Mystats'
 import { Hallofame } from '../pages/Wholeofame/Hallofame'
-
-
+import { ForgotPassword } from '../pages/Auth/ForgotPassword'
+import { ResetPassword } from '../pages/Auth/ResetPassword'
 
 export const Allroutes=()=>{
    
@@ -27,6 +27,8 @@ export const Allroutes=()=>{
         <Route path="/reg" element={<Reg />} />
         <Route path="/graph" element={<Graph />} />
         <Route path="/Log" element={<Log />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/mystats" element={<Mystats />} />
         <Route path="/hallofame" element={<Hallofame/>} />

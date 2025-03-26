@@ -106,7 +106,7 @@ class UserAuthServices {
       throw new BadRequestError("Not able to store the reset token");
     }
     const response = await this._userAuthRepository.sendMailForForgotPassword(
-      "psvishnu131@gmail.com",
+      email,
       token
     );
     if (!response) {
@@ -124,13 +124,12 @@ class UserAuthServices {
     }
     const hashedToken = user.resetToken;
 
-    const { valid } = verifyResetToken(token, hashedToken);
+    const { valid } = await verifyResetToken(token, hashedToken);
     if (!valid) {
       throw new BadRequestError("Invalid token");
     }
-    const response = await this._userAuthRepository.resetPassword(
+    const response = await this._userAuthRepository.storeNewPassword(
       email,
-      hashedToken,
       password
     );
     return response;
