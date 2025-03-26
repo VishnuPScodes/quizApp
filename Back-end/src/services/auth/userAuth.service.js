@@ -1,4 +1,8 @@
 import { UserAuthRepository } from "../../repository/auth/auth.repository.js";
+import {
+  generateResetToken,
+  verifyResetToken,
+} from "../../utils/auth/token.js";
 import { BadRequestError } from "../../utils/response/error.js";
 import { newToken } from "../../utils/token.js";
 
@@ -90,17 +94,45 @@ class UserAuthServices {
     if (!user) {
       throw new BadRequestError("User does not exists with this email id");
     }
-    const tokenData = {
-      email: user.email,
-    };
-    const accessToken = newToken(tokenData, "1h");
+
+    const { token, hashedToken, expiresAt } = await generateResetToken();
+
+    const updatedUserDetails = await this._userAuthRepository.storeResetToken(
+      user._id,
+      hashedToken,
+      expiresAt
+    );
+    if (!updatedUserDetails) {
+      throw new BadRequestError("Not able to store the reset token");
+    }
     const response = await this._userAuthRepository.sendMailForForgotPassword(
       "psvishnu131@gmail.com",
-      "Welcome to Our Platform",
-      "Thank you for joining!",
-      "<h1>Welcome Aboard!</h1><p>We're excited to have you with us.</p>"
+      token
     );
+    if (!response) {
+      throw new BadRequestError("Not able to send the mail");
+    }
 
+    return { token, status: "Mail sent successfully" };
+  }
+
+  async resetPassword(params) {
+    const { email, password, token } = params;
+    const user = await this._userAuthRepository.isUserAlreadyExists(email);
+    if (!user) {
+      throw new BadRequestError("User does not exists with this email id");
+    }
+    const hashedToken = user.resetToken;
+
+    const { valid } = verifyResetToken(token, hashedToken);
+    if (!valid) {
+      throw new BadRequestError("Invalid token");
+    }
+    const response = await this._userAuthRepository.resetPassword(
+      email,
+      hashedToken,
+      password
+    );
     return response;
   }
 }

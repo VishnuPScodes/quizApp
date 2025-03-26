@@ -40,6 +40,12 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: null,
   },
+  resetToken: {
+    type: String,
+  },
+  resetTokenExpiration: {
+    type: Date,
+  },
 });
 
 //hashing to protect the passwords
