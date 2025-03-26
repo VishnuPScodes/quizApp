@@ -33,9 +33,10 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log({ email, password });
+  console.log("Login request body:", req.body);
 
   const loginResponse = await UserAuthServices_.userLogin({ password, email });
+  console.log("Login response:", loginResponse);
 
   const { accessToken, user } = loginResponse;
   res.cookie("access_token", accessToken, {
@@ -43,7 +44,13 @@ export const loginUser = async (req, res) => {
     secure: process.env.NODE_ENV === "production",
   });
 
-  res.send(user);
+  // Send user data with token
+  const responseData = {
+    ...user.toJSON(),
+    token: accessToken
+  };
+  console.log("Sending response:", responseData);
+  res.send(responseData);
 };
 
 export default router;

@@ -19,55 +19,67 @@ import ParticlesBg from "particles-bg";
 
 export const Log = () => {
   const toast = useToast();
-  //taking loading from the redux store
   const loading = useSelector((state) => state.loading);
-  //getting useDispatch hook to connect with the redux from react
   const dispatch = useDispatch();
-  //data ,state to store all the data from the input box
-
-  const [data, setData] = useState([]);
-  //using useNavigate to go to different page
-
+  const [data, setData] = useState({});
   const navigate = useNavigate();
-
-  //function to take the user to the registration page
 
   const handleReg = () => {
     navigate("/reg");
   };
 
-  //using the data from the form to make a post request to the backend to confirm the authentication
-
   const handleLogin = () => {
-    toast({
-      title: "Alert!",
-      description: "Your message here.",
-      status: "success",
-      duration: 3000, // 3 seconds
-      isClosable: true,
-    });
+    console.log("Login data being sent:", data);
+
+    if (!data.email || !data.password) {
+      toast({
+        title: "Error",
+        description: "Please enter both email and password",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     dispatch(authRequest());
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data)
       .then((res) => {
-        console.log("into then");
-        console.log("ress", res.data);
+        console.log("Login response:", res.data);
         dispatch(authSuccess());
         dispatch(addToken(res.data.token));
         dispatch(addId(res.data._id));
-
         dispatch(addUserScore(res.data.score));
+
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res.data.token}`;
+
+        toast({
+          title: "Success",
+          description: "Login successful",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         alert("login successful");
         navigate("/");
       })
       .catch((er) => {
+        console.log("Login error:", er.response?.data);
         dispatch(authFailure());
         alert(er.response?.data?.error);
-        console.log("eer", er);
+
+        toast({
+          title: "Error",
+          description: er.response?.data?.error || "Login failed",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
       });
   };
-
-  //taking data from the form
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -98,8 +110,8 @@ export const Log = () => {
           />
         </div>
 
-        <div 
-          onClick={() => navigate("/forgot-password")} 
+        <div
+          onClick={() => navigate("/forgot-password")}
           style={{
             textAlign: "right",
             width: "81%",
@@ -108,7 +120,7 @@ export const Log = () => {
             cursor: "pointer",
             color: "#bb8135",
             fontFamily: "Poppins",
-            fontSize: "14px"
+            fontSize: "14px",
           }}
         >
           Forgot Password?
