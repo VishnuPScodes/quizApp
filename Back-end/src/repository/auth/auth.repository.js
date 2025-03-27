@@ -59,39 +59,95 @@ export class UserAuthRepository {
 
       const transporter = createTransporter();
 
-      // Define email options
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to,
-        subject: "Password Reset Request",
+        subject: "Reset Your Quiz App Password",
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2>Password Reset Request</h2>
-            <p>You have requested a password reset for your account.</p>
-            <p>Click the button below to reset your password:</p>
-            <a href="${resetURL}" style="
-              display: inline-block;
-              padding: 10px 20px;
-              background-color: #4CAF50;
-              color: white;
-              text-decoration: none;
-              border-radius: 5px;
-            ">Reset Password</a>
-            <p>If you did not request a password reset, please ignore this email.</p>
-            <p>This link will expire in 1 hour.</p>
+          <div style="
+            font-family: 'Poppins', Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          ">
+            <div style="
+              text-align: center;
+              font-weight: 600;
+              font-size: 25px;
+              padding: 20px 0;
+              color: #000;
+            ">
+              Reset Your Password
+            </div>
+            
+            <div style="
+              padding: 20px;
+              background-color: cornsilk;
+              border-radius: 10px;
+              margin: 20px 0;
+              border: 1px solid #000;
+            ">
+              <p style="
+                margin: 0;
+                font-size: 16px;
+                line-height: 24px;
+                color: #000;
+              ">
+                You have requested to reset your password for your Quiz App account.
+              </p>
+              
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${resetURL}" style="
+                  display: inline-block;
+                  padding: 10px 30px;
+                  background-color: cornsilk;
+                  color: #000;
+                  text-decoration: none;
+                  border-radius: 10px;
+                  border: 1px solid #000;
+                  font-family: 'Poppins', Arial, sans-serif;
+                  font-weight: 500;
+                  transition: all 0.3s;
+                  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                ">Reset Password</a>
+              </div>
+              
+              <p style="
+                margin: 20px 0 0;
+                font-size: 14px;
+                color: #bb8135;
+                text-align: center;
+              ">
+                This link will expire in 15 minutes.
+              </p>
+            </div>
+            
+            <div style="
+              text-align: center;
+              font-size: 14px;
+              color: #666;
+              margin-top: 20px;
+            ">
+              If you did not request a password reset, please ignore this email.
+            </div>
           </div>
         `,
         text: `
-          Password Reset Request
+          Reset Your Quiz App Password
           
+          You have requested to reset your password.
           Click the following link to reset your password:
           ${resetURL}
           
-          If you did not request a password reset, please ignore this email.
+          This link will expire in 15 minutes.
           
-          This link will expire in 1 hour.
+          If you did not request a password reset, please ignore this email.
         `,
       };
+
       const info = await transporter.sendMail(mailOptions);
       console.log("Email sent successfully:", info.messageId);
       return info;
