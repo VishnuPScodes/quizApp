@@ -48,8 +48,7 @@ export const Question = () => {
         `${
           import.meta.env.VITE_BASE_URL
         }/quiz/question/65d6fb657ff653a7ee9cb3a9`,
-        {},
-        { withCredentials: true }
+        { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
       )
       .then((e) => {
         let data = e.data;
