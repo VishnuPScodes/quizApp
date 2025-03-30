@@ -37,6 +37,8 @@ export const loginUser = async (req, res) => {
   const loginResponse = await UserAuthServices_.userLogin({ password, email });
 
   const { accessToken, user } = loginResponse;
+  console.log({ accessToken });
+
   res.cookie("access_token", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
