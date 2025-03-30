@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authRequest } from "../../redux/action";
+import { addToken, authRequest } from "../../redux/action";
 import { ThreeDots } from "react-loader-spinner";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import "./auth.css";
@@ -25,6 +25,9 @@ export const Reg = () => {
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/auth/register`, data)
       .then((res) => {
+        let token = res.data.token;
+        dispatch(authRequest(token));
+        dispatch(addToken(token));
         setLoading(false);
         alert("Registered");
         navigate("/log");

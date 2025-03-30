@@ -28,6 +28,7 @@ export const registerUser = async (req, res) => {
   res.status(200).send({
     message: "User registered",
     data: user?.user,
+    token: accessToken,
   });
 };
 
@@ -44,7 +45,11 @@ export const loginUser = async (req, res) => {
     secure: process.env.NODE_ENV === "production",
   });
 
-  res.send(user);
+  res.send({
+    message: "User logged in",
+    data: user,
+    token: accessToken,
+  });
 };
 
 export default router;
