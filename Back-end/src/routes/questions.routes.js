@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 
 import {
   createQuestion,
@@ -8,50 +8,50 @@ import {
   postQuestionForOneUserByAdmin,
   removeAllQuestionsPerUser,
   userResponseEvaluation,
-} from '../controllers/questionToUser.controller.js';
-import asyncHandler from '../utils/asyncHandler.js';
-import { isAuthenticated } from '../middlewares/auth/authenticate.js';
+} from "../controllers/questionToUser.controller.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import { isAuthenticated } from "../middlewares/auth/authenticate.js";
 import {
   createQuestionValidator,
   questionIdValidator,
-} from '../middlewares/validators/question.js';
+} from "../middlewares/validators/question.js";
 
 const questionRouter = express.Router();
 
 questionRouter.get(
-  '/questions',
+  "/questions",
   isAuthenticated,
   asyncHandler(getAllQuestions)
 );
 questionRouter.post(
-  '/question',
+  "/question",
   isAuthenticated,
   createQuestionValidator,
   asyncHandler(createQuestion)
 );
 questionRouter.get(
-  '/question/:questionId',
+  "/question/:questionId",
   isAuthenticated,
   questionIdValidator,
   asyncHandler(getQuestionById)
 );
 questionRouter.get(
-  '/userQuestions/:userId',
+  "/userQuestions/:userId",
   isAuthenticated,
   asyncHandler(getUserQuestions)
 );
 questionRouter.post(
-  '/nextQuestion',
+  "/nextQuestion",
   isAuthenticated,
   asyncHandler(userResponseEvaluation)
 );
 questionRouter.post(
-  '/postQuestion/:userId',
+  "/postQuestion/:userId",
   isAuthenticated,
   asyncHandler(postQuestionForOneUserByAdmin)
 );
 questionRouter.delete(
-  '/removeAllQuestions/:userId',
+  "/removeAllQuestions/:userId",
   isAuthenticated,
   asyncHandler(removeAllQuestionsPerUser)
 );

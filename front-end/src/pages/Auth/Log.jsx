@@ -54,7 +54,7 @@ export const Log = () => {
         console.log("ress", res.data);
         dispatch(authSuccess());
         dispatch(addToken(res.data.token));
-        dispatch(addId(res.data._id));
+        dispatch(addId(res.data?.user?._id));
 
         dispatch(addUserScore(res.data.score));
         alert("login successful");
@@ -62,6 +62,8 @@ export const Log = () => {
       })
       .catch((er) => {
         dispatch(authFailure());
+        console.log("into catch", er.response);
+
         alert(er.response?.data?.error);
         console.log("eer", er);
       });
@@ -98,8 +100,8 @@ export const Log = () => {
           />
         </div>
 
-        <div 
-          onClick={() => navigate("/forgot-password")} 
+        <div
+          onClick={() => navigate("/forgot-password")}
           style={{
             textAlign: "right",
             width: "81%",
@@ -108,7 +110,7 @@ export const Log = () => {
             cursor: "pointer",
             color: "#bb8135",
             fontFamily: "Poppins",
-            fontSize: "14px"
+            fontSize: "14px",
           }}
         >
           Forgot Password?

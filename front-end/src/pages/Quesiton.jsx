@@ -10,29 +10,24 @@ import { Progress } from "@chakra-ui/react";
 import { MdTimer } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
+
 export const Question = () => {
   const token = useSelector((state) => state.token);
   const userScore = useSelector((state) => state.userScore);
   const [loading, setLoading] = useState(false);
   const [single, setSingle] = useState(1);
   const [dfl, setDfl] = useState(5);
-  //if no question available => making a state to detect that
   const [noq, setNoq] = useState(true);
   const intervalRef = useRef(null);
-  //counter to count the number of questions asked
-
   const [count, setCount] = useState(0);
-  //score ,state to calculate the total score
-
   const [score, setScore] = useState(0);
-
   const [ind, setind] = useState(4);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(true);
-  //using use dispatch to dispatch an action to redux to change value im redux
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
   const [useScore, setUserScore] = useState(0);
+
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setTimer((p) => p + 1);
@@ -55,14 +50,16 @@ export const Question = () => {
         setSingle(data);
         setLoader(false);
       })
+      .catch((err) => {
+        setLoader(false);
+        console.log("error", err.response.data.error);
+      })
       .then(() => {
         if (single) {
           setNoq(false);
         }
       });
   }, []);
-
-  //function to check the correctness of the answer given by user ,by sending a network request to the back-end
 
   const handleCheck = (ans) => {
     const data = {
@@ -71,11 +68,9 @@ export const Question = () => {
     };
     setLoading(true);
     axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/quiz/nextQuestion/`,
-        data,
-        { headers: { Authorization: `Bearer ${token}` } } // Pass token in request headers
-      )
+      .post(`${import.meta.env.VITE_BASE_URL}/quiz/nextQuestion/`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((e) => {
         if (e.data == "") {
           setind(-1);
@@ -119,7 +114,6 @@ export const Question = () => {
       ) : (
         <div>
           <div className="cont-que">
-            {" "}
             {count == 10 ? (
               <QuizEnd timeTaken={timer} score={score} />
             ) : (

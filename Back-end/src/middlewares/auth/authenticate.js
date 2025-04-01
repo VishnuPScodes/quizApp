@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
@@ -15,22 +15,26 @@ const verifyToken = (token) => {
 export const isAuthenticated = async (req, res, next) => {
   //check weather autherization header is set
   //if not throw an error
+
   if (!req.headers.authorization) {
     return res
       .status(400)
-      .send({ message: 'Authorization token was not provided' });
+      .send({ message: "Authorization token was not provided" });
   }
 
   //if bearer token in autherization header
 
   //if not throw an error
-  if (!req.headers.authorization.startsWith('Bearer ')) {
+  if (!req.headers.authorization.startsWith("Bearer ")) {
     return res
       .status(400)
-      .send({ message: 'Authorization token was not provided' });
+      .send({ message: "Authorization token was not provided" });
   }
+
+  console.log("........", req.headers.authorization);
+
   //else split the bearer token and get the [1] which is the token
-  const token = req.headers.authorization.split(' ')[1];
+  const token = req.headers.authorization.split(" ")[1];
 
   //then we will call jwt to verify the token
   //if token is invalid we will throw error
@@ -40,7 +44,7 @@ export const isAuthenticated = async (req, res, next) => {
     user = await verifyToken(token);
     req.user = user.user;
   } catch (error) {
-    res.status(400).send({ message: 'Authorization token was not provided' });
+    res.status(400).send({ message: "Authorization token was not provided" });
   }
 
   //if the token is valid then we will user retrived from the token in the request object

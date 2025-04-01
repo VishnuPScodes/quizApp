@@ -1,6 +1,6 @@
-import { QuestionsToUserRepository } from '../repository/questionsToUser.repository.js';
-import { NotFoundError, BadRequestError } from '../utils/response/error.js';
-import bcrypt from 'bcryptjs';
+import { QuestionsToUserRepository } from "../repository/questionsToUser.repository.js";
+import { NotFoundError, BadRequestError } from "../utils/response/error.js";
+import bcrypt from "bcryptjs";
 
 class QuestionToUserServices {
   constructor() {
@@ -10,7 +10,7 @@ class QuestionToUserServices {
   async getAllQuestions() {
     const allQuestions = await this._questionToUserRepository.getAllQuestions();
     if (!allQuestions) {
-      throw new NotFoundError('Questions not found!');
+      throw new NotFoundError("Questions not found!");
     }
 
     return allQuestions;
@@ -38,7 +38,7 @@ class QuestionToUserServices {
       difficulty,
     });
     if (!postedQuestion) {
-      throw new BadRequestError('Could not post the question');
+      throw new BadRequestError("Could not post the question");
     }
 
     return postedQuestion;
@@ -49,18 +49,22 @@ class QuestionToUserServices {
       userId
     );
     if (questions.length == 0) {
-      throw new NotFoundError('No questions available for the user!');
+      throw new NotFoundError("No questions available for the user!");
     }
 
     return questions;
   }
 
   async getQuestionById(questionId) {
+    console.log("herere 1");
+
     const question = await this._questionToUserRepository.getQuestionById(
       questionId
     );
+    console.log("herere 2");
+
     if (!question) {
-      throw new BadRequestError('Question not found!');
+      throw new BadRequestError("Question not found!");
     }
 
     return question;
@@ -91,7 +95,7 @@ class QuestionToUserServices {
         userId,
       });
     if (!questionCreated) {
-      throw new BadRequestError('Could not post the question!');
+      throw new BadRequestError("Could not post the question!");
     }
 
     return questionCreated;
@@ -104,7 +108,7 @@ class QuestionToUserServices {
     );
 
     if (!question) {
-      throw new BadRequestError('Question not found!');
+      throw new BadRequestError("Question not found!");
     }
     const difficultyLevel = question.difficulty;
 
@@ -131,7 +135,7 @@ class QuestionToUserServices {
     const question =
       await this._questionToUserRepository.deleteAllQuestionForTheUser(userId);
     if (!question) {
-      throw new BadRequestError('Could not remove the questions!');
+      throw new BadRequestError("Could not remove the questions!");
     }
 
     return question;
