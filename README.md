@@ -1,38 +1,99 @@
+# 🎯 Adaptive Quiz App
 
-# Adaptive quiz system
+An interactive quiz application that adapts question difficulty based on user performance. Features a dynamic scoring system, user authentication, and an admin panel for question management.
 
-A simple quiz app where admin will be able to add questions and user will be able to participate after login in.
+## ✨ Features
 
+- **Adaptive Difficulty**: Questions adjust based on user performance
+- **Real-time Scoring**: Dynamic score tracking during quiz sessions
+- **User Authentication**: Secure login/registration system with password reset
+- **Hall of Fame**: Leaderboard showcasing top performers
+- **Personal Stats**: Track your performance metrics
+- **Admin Panel**: Manage quiz questions and difficulty levels
+- **Interactive UI**: Beautiful particle effects and smooth transitions
 
-## Run Locally
+## 🚀 Tech Stack
 
-Clone the project
+### Frontend
+- React.js with Vite
+- Redux for state management
+- Chakra UI & Material UI
+- Particle effects for enhanced visuals
+- D3.js for data visualization
 
+### Backend
+- Node.js & Express
+- MongoDB with Mongoose
+- JWT Authentication
+- Nodemailer for email notifications
+
+## 🛠️ Installation
+
+1. Clone the repository:
 ```bash
-  git clone https://github.com/VishnuPScodes/quizApp
+git clone https://github.com/VishnuPScodes/quizApp
 ```
 
-Go to the project directory
-
+2. Install dependencies for both frontend and backend:
 ```bash
-  cd quizApp
+# Frontend
+cd front-end
+npm install
+
+# Backend
+cd ../Back-end
+npm install
 ```
 
-Install dependencies
-
+3. Set up environment variables:
 ```bash
-  npm install
+# Frontend (.env)
+VITE_BASE_URL=http://localhost:4001
+
+# Backend (.env)
+PORT=4001
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
 ```
 
-Start the server
-
+4. Start the development servers:
 ```bash
-  npm run dev
+# Backend
+cd Back-end
+npm run dev
+
+# Frontend
+cd front-end
+npm run dev
 ```
 
+## 🎮 How to Play
 
-## Deployment
+1. Register/Login to your account
+2. Start a new quiz session
+3. Answer questions within the time limit
+4. Watch your score adapt based on performance
+5. Save your score to the Hall of Fame
+6. Track your progress in My Stats
 
-here is the deployed link
-```
-https://quiz-b549itocf-vishnupscodes.vercel.app/
+## 👨‍💼 Admin Features
+
+- Add new questions to the question bank
+- Set difficulty levels for questions
+- Monitor user performance
+- Manage question pool
+
+## 🌐 Live Demo
+
+Check out the live application: [Quiz App Demo](https://quiz-b549itocf-vishnupscodes.vercel.app/)
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+Made with ❤️ by Vishnu PS
